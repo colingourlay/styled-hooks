@@ -22,16 +22,20 @@
     "dist"
   ],
   "scripts": {
-    "start": "concurrently --kill-others \"http-server example --silent\" \"npm run watch\"",
-    "watch": "microbundle watch --define process.env.NODE_ENV=development --entry example/src/index.tsx --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
-    "build": "rm -rf dist && microbundle --define process.env.NODE_ENV=production --format cjs,es --sourcemap=false",
+    "start": "concurrently -k \"npm:example:*\"",
+    "example:serve": "http-server example --silent",
+    "example:watch": "microbundle watch --define process.env.NODE_ENV=development --entry example/src/index.tsx --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
+    "clean": "rimraf dist",
+    "watch": "npm run clean && microbundle watch --define process.env.NODE_ENV=development --format cjs,es",
+    "build": "npm run clean && microbundle --define process.env.NODE_ENV=production --format cjs,es --sourcemap=false",
     "prepare": "npm run build"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
     "http-server": "^0.11.1",
     "microbundle": "^0.11.0",
-    "react": "^16.8.4"
+    "react": "^16.8.4",
+    "rimraf": "^2.6.3"
   },
   "peerDependencies": {
     "react": "^16.8.4"
