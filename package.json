@@ -1,0 +1,38 @@
+{
+  "name": "hook-style",
+  "version": "1.0.0",
+  "description": "Style your React components with tagged template literal Hooks",
+  "keywords": [
+    "react hook",
+    "style",
+    "tagged template"
+  ],
+  "license": "Unlicense",
+  "contributors": [
+    "Colin Gourlay <colin@colin-gourlay.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colingourlay/hook-style.git"
+  },
+  "main": "dist/hook-style.js",
+  "module": "dist/hook-style.mjs",
+  "source": "src/hook-style.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "http-server example --silent & npm run watch",
+    "watch": "microbundle watch --define process.env.NODE_ENV=development --entry example/src/index.tsx --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
+    "build": "rm -rf dist && microbundle --define process.env.NODE_ENV=production --format cjs,es --sourcemap=false",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "microbundle": "^0.11.0",
+    "react": "^16.8.4"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4"
+  }
+}

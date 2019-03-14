@@ -1,0 +1,10 @@
+# dependencies
+node_modules
+
+# builds
+.rts2_cache_*
+dist
+
+# misc
+.DS_Store
+npm-debug.log
