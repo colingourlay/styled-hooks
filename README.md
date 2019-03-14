@@ -13,12 +13,12 @@ $ npm i hook-style
 ```jsx
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider, useStyle, useTheme } from 'hook-style';
+import { ThemeProvider, useTheme, useVariableStyle } from 'hook-style';
 
 function Button({ primary, children }) {
   const { bg, fg } = useTheme();
 
-  const className = useStyle`
+  const [className, customProps] = useVaribleStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
@@ -29,14 +29,18 @@ function Button({ primary, children }) {
     border: 0.125rem solid ${fg};
   `;
 
-  return <button className={className}>{children}</button>;
+  return (
+    <button className={className} style={customProps}>
+      {children}
+    </button>
+  );
 }
 
 function App() {
   const [fg, setFG] = useState('#000000');
   const [bg, setBG] = useState('#ffffff');
 
-  const className = useStyle`
+  const [className, customProps] = useVariableStyle`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,7 +60,7 @@ function App() {
 
   return (
     <ThemeProvider theme={{ bg, fg }}>
-      <div className={className} onMouseMove={updateTheme} onTouchMove={updateTheme}>
+      <div className={className} style={customProps} onMouseMove={updateTheme} onTouchMove={updateTheme}>
         <Button primary>Primary</Button>
         <Button>Standard</Button>
       </div>
