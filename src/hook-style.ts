@@ -1,13 +1,4 @@
-import { useLayoutEffect, useMemo } from 'react';
-import { generateClassName } from './naming';
-import { addRule } from './style';
-import { riffle } from './template';
+import { useStyle } from './style';
+import { ThemeConsumer, ThemeContext, ThemeProvider, useTheme } from './theme';
 
-export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
-  const declarationBlock = useMemo(() => riffle(strings, inputs), inputs.join('|'));
-  const className = generateClassName(declarationBlock);
-
-  useLayoutEffect(() => addRule(className, declarationBlock), inputs);
-
-  return className;
-}
+export { ThemeConsumer, ThemeContext, ThemeProvider, useStyle, useTheme };

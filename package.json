@@ -1,7 +1,7 @@
 {
   "name": "hook-style",
   "version": "1.0.0",
-  "description": "Style your React components with tagged template literal Hooks",
+  "description": "Style and theme your React components with Hooks",
   "keywords": [
     "react hook",
     "style",
