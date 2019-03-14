@@ -11,7 +11,7 @@ $ npm i hook-style
 ## Usage
 
 ```jsx
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider, useStyle, useTheme } from 'hook-style';
 
