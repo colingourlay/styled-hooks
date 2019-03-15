@@ -24,7 +24,7 @@
   "scripts": {
     "start": "concurrently -k \"npm:example:*\"",
     "example:serve": "http-server example --silent",
-    "example:watch": "microbundle watch --no-compress --entry example/src/index.tsx --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
+    "example:watch": "microbundle watch --no-compress --entry example/src/index.tsx --external=@emotion/stylis=Stylis --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
     "clean": "rimraf dist",
     "watch": "npm run clean && microbundle watch --no-compress --format cjs,es",
     "build": "npm run clean && microbundle --no-compress --format cjs,es --sourcemap=false",
@@ -39,5 +39,8 @@
   },
   "peerDependencies": {
     "react": "^16.8.4"
+  },
+  "dependencies": {
+    "@emotion/stylis": "^0.8.3"
   }
 }

@@ -64,6 +64,17 @@ function Button({ primary, children }) {
     background-color: ${primary ? fg : 'transparent'};
     color: ${primary ? bg : fg};
     border: 0.125rem solid ${fg};
+
+    @media (min-width: 32rem) {
+      padding: 0.75rem 0;
+      width: 15rem;
+      font-size: 1.5rem;
+    }
+
+    &:focus {
+      color: #000;
+      border-color: #000;
+    }
   `;
 
   return (
