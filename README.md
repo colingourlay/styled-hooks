@@ -13,7 +13,7 @@ $ npm i hook-style
 ```jsx
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider, useTheme, useVariableStyle } from 'hook-style';
+import { ThemeProvider, useStyle, useTheme } from 'hook-style';
 
 function App() {
   const [theme, setTheme] = useState({
@@ -22,7 +22,7 @@ function App() {
     marginRem: 1
   });
 
-  const [className, customProps] = useVariableStyle`
+  const [className, customProps] = useStyle`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,7 +55,7 @@ function App() {
 function Button({ primary, children }) {
   const { bg, fg } = useTheme();
 
-  const [className, customProps] = useVariableStyle`
+  const [className, customProps] = useStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;

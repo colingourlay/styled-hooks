@@ -35,23 +35,8 @@ function unsubscribe(className: string, declarationBlock: string) {
   }
 }
 
-export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
-  const declarationBlock = useMemo(() => riffle(strings, inputs), inputs.join('|'));
-  const className = generateClassName(declarationBlock);
-
-  useLayoutEffect(() => subscribe(className, declarationBlock), inputs);
-
-  useEffect(
-    () => () => {
-      unsubscribe(className, declarationBlock);
-    },
-    inputs
-  );
-
-  return className;
-}
-
-export function useVariableStyle(strings: TemplateStringsArray, ...inputs: any[]): any[] {
+// Creates a single CSS rules containing Custom Properties for each input and returns className & Custom Property values
+export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): any[] {
   const className = generateClassName(strings.join(''));
   const [declarationBlock, customProps] = useMemo(
     () => riffleWithCustomProps(className, strings, inputs),
@@ -68,4 +53,21 @@ export function useVariableStyle(strings: TemplateStringsArray, ...inputs: any[]
   );
 
   return [className, customProps];
+}
+
+// Creates CSS rules for every unique set of inputs and returns a className
+export function useUnstableStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
+  const declarationBlock = useMemo(() => riffle(strings, inputs), inputs.join('|'));
+  const className = generateClassName(declarationBlock);
+
+  useLayoutEffect(() => subscribe(className, declarationBlock), inputs);
+
+  useEffect(
+    () => () => {
+      unsubscribe(className, declarationBlock);
+    },
+    inputs
+  );
+
+  return className;
 }

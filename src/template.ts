@@ -25,7 +25,7 @@ export function riffleWithCustomProps(className: string, strings: TemplateString
     }
 
     if (values[i] != null) {
-      const propName = `--${className}_${nextPropIndex++}`;
+      const propName = `--${className}-${nextPropIndex++}`;
 
       result += `var(${propName})`;
       props[propName] = String(values[i]);

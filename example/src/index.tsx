@@ -1,7 +1,7 @@
 declare var React;
 declare var ReactDOM;
 const { useEffect, useState } = React;
-import { ThemeProvider, useStyle, useTheme, useVariableStyle } from '../../src/hook-style';
+import { ThemeProvider, useStyle, useTheme, useUnstableStyle } from '../../src/hook-style';
 import { hsl2hex } from './color';
 
 interface ButtonProps {
@@ -11,7 +11,7 @@ interface ButtonProps {
 
 function Button({ primary, children }: ButtonProps) {
   const { bg, fg, marginRem } = useTheme();
-  const [className, customProps] = useVariableStyle`
+  const [className, customProps] = useStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
@@ -35,7 +35,7 @@ interface EmojiProps {
 }
 
 function Emoji({ visible, children }: EmojiProps) {
-  const className = useStyle`
+  const className = useUnstableStyle`
     opacity: ${visible ? 1 : 0};
     margin: 1rem;
     font-size: 5rem;
@@ -54,7 +54,7 @@ function App() {
     marginRem: 1
   });
 
-  const [className, customProps] = useVariableStyle`
+  const [className, customProps] = useStyle`
     display: flex;
     flex-direction: column;
     justify-content: center;
