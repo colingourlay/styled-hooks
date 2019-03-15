@@ -72,13 +72,13 @@ export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): strin
           return memo + `${propKey}: ${arg[propKey]};`;
         }, '')}}`;
       }),
-    customPropsClassName
+    [customPropsClassName]
   );
 
-  useLayoutEffect(() => subscribe(css), className);
-  useLayoutEffect(() => subscribe(customPropsCSS), customPropsClassName);
-  useEffect(() => () => unsubscribe(css), className);
-  useEffect(() => () => unsubscribe(customPropsCSS), customPropsClassName);
+  useLayoutEffect(() => subscribe(css), strings);
+  useLayoutEffect(() => subscribe(customPropsCSS), inputs);
+  useEffect(() => () => unsubscribe(css), strings);
+  useEffect(() => () => unsubscribe(customPropsCSS), inputs);
 
   return `${className} ${customPropsClassName}`;
 }
