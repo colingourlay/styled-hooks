@@ -15,6 +15,43 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider, useTheme, useVariableStyle } from 'hook-style';
 
+function App() {
+  const [theme, setTheme] = useState({
+    bg: '#ffffff',
+    fg: '#000000',
+    marginRem: 1
+  });
+
+  const [className, customProps] = useVariableStyle`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: ${theme.bg};
+    box-sizing: border-box;
+    min-height: 100vh;
+  `;
+
+  function updateColors(e) {
+    const { pageX, pageY } = e.touches ? e.touches[0] : e;
+
+    setTheme({
+      bg: hsl2hex(pageX / window.innerWidth, 0.25, 0.9),
+      fg: hsl2hex(pageY / window.innerHeight, 0.5, 0.5)
+    });
+  }
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className={className} style={customProps} onMouseMove={updateColors} onTouchMove={updateColors}>
+        <Button primary>Primary</Button>
+        <Button>Standard</Button>
+      </div>
+    </ThemeProvider>
+  );
+}
+
 function Button({ primary, children }) {
   const { bg, fg } = useTheme();
 
@@ -33,38 +70,6 @@ function Button({ primary, children }) {
     <button className={className} style={customProps}>
       {children}
     </button>
-  );
-}
-
-function App() {
-  const [fg, setFG] = useState('#000000');
-  const [bg, setBG] = useState('#ffffff');
-
-  const [className, customProps] = useVariableStyle`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: ${bg};
-    box-sizing: border-box;
-    min-height: 100vh;
-  `;
-
-  function updateTheme(e) {
-    const { pageX, pageY } = e.touches ? e.touches[0] : e;
-
-    setFG(hsl2hex(pageX / window.innerWidth, 0.5, 0.5));
-    setBG(hsl2hex(pageY / window.innerHeight, 0.25, 0.9));
-  }
-
-  return (
-    <ThemeProvider theme={{ bg, fg }}>
-      <div className={className} style={customProps} onMouseMove={updateTheme} onTouchMove={updateTheme}>
-        <Button primary>Primary</Button>
-        <Button>Standard</Button>
-      </div>
-    </ThemeProvider>
   );
 }
 

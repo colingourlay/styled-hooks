@@ -48,14 +48,11 @@ function Emoji({ visible, children }: EmojiProps) {
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setActiveIndex((activeIndex + 1) % 4);
-    }, 500);
-  }, [activeIndex]);
-
-  const [fg, setFG] = useState('#000000');
-  const [bg, setBG] = useState('#ffffff');
+  const [theme, setTheme] = useState({
+    bg: '#ffffff',
+    fg: '#000000',
+    marginRem: 1
+  });
 
   const [className, customProps] = useVariableStyle`
     display: flex;
@@ -63,21 +60,30 @@ function App() {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: ${bg};
+    background: ${theme.bg};
     box-sizing: border-box;
     min-height: 100vh;
   `;
 
-  function updateTheme(e) {
+  function updateColors(e) {
     const { pageX, pageY } = e.touches ? e.touches[0] : e;
 
-    setFG(hsl2hex(pageX / window.innerWidth, 0.5, 0.5));
-    setBG(hsl2hex(pageY / window.innerHeight, 0.25, 0.9));
+    setTheme(theme => ({
+      ...theme,
+      bg: hsl2hex(pageX / window.innerWidth, 0.25, 0.9),
+      fg: hsl2hex(pageY / window.innerHeight, 0.5, 0.5)
+    }));
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      setActiveIndex((activeIndex + 1) % 4);
+    }, 500);
+  }, [activeIndex]);
+
   return (
-    <ThemeProvider theme={{ bg, fg, marginRem: 1 }}>
-      <div className={className} style={customProps} onMouseMove={updateTheme} onTouchMove={updateTheme}>
+    <ThemeProvider theme={theme}>
+      <div className={className} style={customProps} onMouseMove={updateColors} onTouchMove={updateColors}>
         <Button primary={activeIndex === 0}>First</Button>
         <Button primary={activeIndex === 1}>Second</Button>
         <Button primary={activeIndex === 2}>Third</Button>
