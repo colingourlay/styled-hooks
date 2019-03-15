@@ -18,7 +18,7 @@ import { ThemeProvider, useTheme, useVariableStyle } from 'hook-style';
 function Button({ primary, children }) {
   const { bg, fg } = useTheme();
 
-  const [className, customProps] = useVaribleStyle`
+  const [className, customProps] = useVariableStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
