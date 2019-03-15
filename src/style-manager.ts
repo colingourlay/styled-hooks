@@ -1,25 +1,6 @@
-/*
-This is based on emotion's StyleSheet (which is based on glamor's)
-
-High performance StyleSheet for css-in-js systems
-- uses multiple style tags behind the scenes for millions of rules
-- uses `insertRule` for appending in production for *much* faster performance
-
-// Usage
-
-// Create a styleSheet
-const styleSheet = new StyleSheet({ container: document.head });
-
-// Append a CSS rule into the stylesheet
-styleSheet.insert('#box { border: 1px solid red; }')
-
-// Empty the stylesheet of all its contents
-styleSheet.flush()
-*/
-
 function sheetForTag(tag: HTMLStyleElement): CSSStyleSheet {
   if (!tag.sheet) {
-    // This weirdness brought to you by firefox
+    // This weirdness brough./style-manageru by firefox
     for (let i = 0; i < document.styleSheets.length; i++) {
       if (document.styleSheets[i].ownerNode === tag) {
         // @ts-ignore
@@ -50,7 +31,7 @@ function createStyleElement(options: { nonce: string | void }): HTMLStyleElement
   return tag;
 }
 
-export class StyleSheet {
+export class StyleManager {
   isSpeedy: boolean;
   ctr: number;
   tags: HTMLStyleElement[];
@@ -67,7 +48,7 @@ export class StyleSheet {
     this.before = null;
   }
 
-  insert(rule: string) {
+  add(rule: string) {
     if (this.ctr % (this.isSpeedy ? 65000 : 1) === 0) {
       let tag = createStyleElement(this);
       let before: Node | null;
@@ -101,10 +82,24 @@ export class StyleSheet {
     this.ctr++;
   }
 
-  flush() {
-    // @ts-ignore
-    this.tags.forEach(tag => tag.parentNode.removeChild(tag));
-    this.tags = [];
-    this.ctr = 0;
+  remove(rule: string) {
+    tags: for (let tI = 0, tL = this.tags.length; tI < tL; tI++) {
+      const tag = this.tags[tI];
+
+      if (this.isSpeedy) {
+        const sheet = sheetForTag(tag);
+
+        for (let rI = 0, rL = sheet.cssRules.length; rI < rL; rI++) {
+          if (sheet.cssRules[rI].toString() === rule) {
+            sheet.deleteRule(rI);
+            break tags;
+          }
+        }
+      } else if (tag.textContent === rule) {
+        this.tags.splice(tI, 1);
+        this.container.removeChild(tag);
+        break;
+      }
+    }
   }
 }

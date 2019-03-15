@@ -1,19 +1,37 @@
-import { useLayoutEffect, useMemo } from 'react';
+import { useEffect, useLayoutEffect, useMemo } from 'react';
 import { generateClassName } from './naming';
-import { StyleSheet } from './sheet';
+import { StyleManager } from './style-manager';
 import { riffle, riffleWithCustomProps } from './template';
 
-let sheet: StyleSheet;
-const rules = new Set();
+let manager: StyleManager;
+const counts = new Map();
 
-function addRule(className: string, declarationBlock: string) {
-  if (!sheet) {
-    sheet = new StyleSheet({ container: document.head });
+function subscribe(className: string, declarationBlock: string) {
+  if (!manager) {
+    manager = new StyleManager({ container: document.head });
   }
 
-  if (!rules.has(className)) {
-    rules.add(className);
-    sheet.insert(`.${className} {${declarationBlock}}`);
+  if (!counts.has(className)) {
+    counts.set(className, 1);
+    manager.add(`.${className} {${declarationBlock}}`);
+  } else {
+    counts.set(className, counts.get(className) + 1);
+  }
+}
+
+function unsubscribe(className: string, declarationBlock: string) {
+  if (!manager || !counts.has(className)) {
+    return;
+  }
+
+  const count = counts.get(className);
+  counts.set(className, counts.get(className) - 1);
+
+  if (count > 1) {
+    counts.set(className, count - 1);
+  } else {
+    counts.delete(className);
+    manager.remove(`.${className} {${declarationBlock}}`);
   }
 }
 
@@ -21,10 +39,14 @@ export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): strin
   const declarationBlock = useMemo(() => riffle(strings, inputs), inputs.join('|'));
   const className = generateClassName(declarationBlock);
 
-  useLayoutEffect(() => addRule(className, declarationBlock), inputs);
-  // useEffect(() => () => {
-  //   // remove dormant rules
-  // }, inputs);
+  useLayoutEffect(() => subscribe(className, declarationBlock), inputs);
+
+  useEffect(
+    () => () => {
+      unsubscribe(className, declarationBlock);
+    },
+    inputs
+  );
 
   return className;
 }
@@ -36,7 +58,14 @@ export function useVariableStyle(strings: TemplateStringsArray, ...inputs: any[]
     inputs.join('|')
   );
 
-  useLayoutEffect(() => addRule(className, declarationBlock), inputs);
+  useLayoutEffect(() => subscribe(className, declarationBlock), className);
+
+  useEffect(
+    () => () => {
+      unsubscribe(className, declarationBlock);
+    },
+    className
+  );
 
   return [className, customProps];
 }
