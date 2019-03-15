@@ -20,7 +20,6 @@ function Button({ primary, children }: ButtonProps) {
     background-color: ${primary ? fg : 'transparent'};
     color: ${primary ? bg : fg};
     border: 0.125rem solid ${fg};
-    transition: background-color .25s, color .25s;
   `;
 
   return (
@@ -67,7 +66,6 @@ function App() {
     background: ${bg};
     box-sizing: border-box;
     min-height: 100vh;
-    transition: background-color .25s;
   `;
 
   function updateTheme(e) {
