@@ -1,7 +1,7 @@
 declare var React;
 declare var ReactDOM;
 const { useEffect, useState } = React;
-import { ThemeProvider, useStyle, useTheme, useUnstableStyle } from '../../src/hook-style';
+import { ThemeProvider, useStyle, useTheme } from '../../src/hook-style';
 import { hsl2hex } from './color';
 
 interface ButtonProps {
@@ -11,7 +11,7 @@ interface ButtonProps {
 
 function Button({ primary, children }: ButtonProps) {
   const { bg, fg, marginRem } = useTheme();
-  const [className, customProps] = useStyle`
+  const className = useStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
@@ -33,11 +33,7 @@ function Button({ primary, children }: ButtonProps) {
     }
   `;
 
-  return (
-    <button className={className} style={customProps}>
-      {children}
-    </button>
-  );
+  return <button className={className}>{children}</button>;
 }
 
 interface EmojiProps {
@@ -46,7 +42,7 @@ interface EmojiProps {
 }
 
 function Emoji({ visible, children }: EmojiProps) {
-  const className = useUnstableStyle`
+  const className = useStyle`
     opacity: ${visible ? 1 : 0};
     margin: 1rem;
     font-size: 5rem;
@@ -65,7 +61,7 @@ function App() {
     marginRem: 1
   });
 
-  const [className, customProps] = useStyle`
+  const className = useStyle`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -94,7 +90,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={className} style={customProps} onMouseMove={updateColors} onTouchMove={updateColors}>
+      <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
         <Button primary={activeIndex === 0}>First</Button>
         <Button primary={activeIndex === 1}>Second</Button>
         <Button primary={activeIndex === 2}>Third</Button>

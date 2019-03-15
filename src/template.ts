@@ -25,20 +25,20 @@ export function riffleWithCustomProps(className: string, strings: TemplateString
     }
 
     if (values[i] != null) {
-      const propName = `--${className}-${nextPropIndex++}`;
+      const propKey = `--${className}-${nextPropIndex++}`;
 
-      result += `var(${propName})`;
-      props[propName] = String(values[i]);
+      result += `var(${propKey})`;
+      props[propKey] = String(values[i]);
 
       if (strings[i + 1]) {
         const [unit] = strings[i + 1].match(UNITS_PATTERN) || [''];
 
         if (unit) {
-          if (!props[propName].length) {
-            props[propName] = '0';
+          if (!props[propKey].length) {
+            props[propKey] = '0';
           }
 
-          props[propName] += unit;
+          props[propKey] += unit;
           editedNextString = strings[i + 1].slice(unit.length);
         }
       }

@@ -22,7 +22,7 @@ function App() {
     marginRem: 1
   });
 
-  const [className, customProps] = useStyle`
+  const className = useStyle`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={className} style={customProps} onMouseMove={updateColors} onTouchMove={updateColors}>
+      <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
         <Button primary>Primary</Button>
         <Button>Standard</Button>
       </div>
@@ -55,7 +55,7 @@ function App() {
 function Button({ primary, children }) {
   const { bg, fg } = useTheme();
 
-  const [className, customProps] = useStyle`
+  const className = useStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
@@ -77,11 +77,7 @@ function Button({ primary, children }) {
     }
   `;
 
-  return (
-    <button className={className} style={customProps}>
-      {children}
-    </button>
-  );
+  return <button className={className}>{children}</button>;
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
