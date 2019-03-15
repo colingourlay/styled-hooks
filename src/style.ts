@@ -38,10 +38,10 @@ function unsubscribe(css: string) {
 
 export function useUnstableStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   const className = generateClassName(strings.concat(inputs).join(''));
-  const css = useMemo(() => stylis(`.${className}`, riffle(strings, inputs)), inputs.join('|'));
+  const css = useMemo(() => stylis(`.${className}`, riffle(strings, inputs)), inputs);
 
-  useLayoutEffect(() => subscribe(css), inputs);
-  useEffect(() => () => unsubscribe(css), inputs);
+  useLayoutEffect(() => subscribe(css), [className]);
+  useEffect(() => () => unsubscribe(css), [className]);
 
   return className;
 }
@@ -75,10 +75,11 @@ export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): strin
     [customPropsClassName]
   );
 
-  useLayoutEffect(() => subscribe(css), strings);
-  useLayoutEffect(() => subscribe(customPropsCSS), inputs);
-  useEffect(() => () => unsubscribe(css), strings);
-  useEffect(() => () => unsubscribe(customPropsCSS), inputs);
+  useLayoutEffect(() => subscribe(css));
+  useEffect(() => () => unsubscribe(css));
+
+  useLayoutEffect(() => subscribe(customPropsCSS), [customPropsClassName]);
+  useEffect(() => () => unsubscribe(customPropsCSS), [customPropsClassName]);
 
   return `${className} ${customPropsClassName}`;
 }
