@@ -10,12 +10,12 @@ interface ButtonProps {
 }
 
 function Button({ primary, children }: ButtonProps) {
-  const { bg, fg } = useTheme();
+  const { bg, fg, marginRem } = useTheme();
   const [className, customProps] = useVariableStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
-    margin: 1rem;
+    margin: ${marginRem}rem;
     width: 10rem;
     background-color: ${primary ? fg : 'transparent'};
     color: ${primary ? bg : fg};
@@ -78,7 +78,7 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={{ bg, fg }}>
+    <ThemeProvider theme={{ bg, fg, marginRem: 1 }}>
       <div className={className} style={customProps} onMouseMove={updateTheme} onTouchMove={updateTheme}>
         <Button primary={activeIndex === 0}>First</Button>
         <Button primary={activeIndex === 1}>Second</Button>

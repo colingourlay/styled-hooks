@@ -59,7 +59,7 @@ export class StyleSheet {
   before: Element | null;
 
   constructor(options: Options) {
-    this.isSpeedy = options.speedy === undefined ? process.env.NODE_ENV === 'production' : options.speedy;
+    this.isSpeedy = !!options.speedy;
     this.tags = [];
     this.ctr = 0;
     this.nonce = options.nonce;
@@ -92,9 +92,7 @@ export class StyleSheet {
 
         sheet.insertRule(rule, isImportRule ? 0 : sheet.cssRules.length);
       } catch (e) {
-        if (process.env.NODE_ENV !== 'production') {
-          console.warn(`There was a problem inserting the following rule: "${rule}"`, e);
-        }
+        tag.appendChild(document.createTextNode(rule));
       }
     } else {
       tag.appendChild(document.createTextNode(rule));

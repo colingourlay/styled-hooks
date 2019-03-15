@@ -24,10 +24,10 @@
   "scripts": {
     "start": "concurrently -k \"npm:example:*\"",
     "example:serve": "http-server example --silent",
-    "example:watch": "microbundle watch --define process.env.NODE_ENV=development --entry example/src/index.tsx --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
+    "example:watch": "microbundle watch --no-compress --entry example/src/index.tsx --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
     "clean": "rimraf dist",
-    "watch": "npm run clean && microbundle watch --define process.env.NODE_ENV=development --format cjs,es",
-    "build": "npm run clean && microbundle --define process.env.NODE_ENV=production --format cjs,es --sourcemap=false",
+    "watch": "npm run clean && microbundle watch --no-compress --format cjs,es",
+    "build": "npm run clean && microbundle --no-compress --format cjs,es --sourcemap=false",
     "prepare": "npm run build"
   },
   "devDependencies": {
