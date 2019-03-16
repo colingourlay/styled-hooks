@@ -1,8 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo } from 'react';
-import Stylis from '@emotion/stylis';
 import { generateClassName } from './naming';
 import { subscribe, unsubscribe } from './style-manager';
-import { riffle, riffleWithCustomProps } from './template';
+import { generateCSS, generateCSSWithCustomProps } from './css';
 
 interface GlobalCSS {
   supports: Function;
@@ -13,11 +12,10 @@ declare var CSS: GlobalCSS;
 const IS_BROWSER_ENVIRONMENT_THAT_SUPPORTS_CSS_CUSTOM_PROPERTIES =
   CSS && CSS.supports && CSS.supports(`--custom: var(--properties)`);
 
-const stylis = new Stylis();
-
 export function useStyleWithoutCustomProps(strings: TemplateStringsArray, ...inputs: any[]): string {
-  const className = generateClassName(strings.concat(inputs).join(''));
-  const css = useMemo(() => stylis(`.${className}`, riffle(strings, inputs)), [className]);
+  const joinedArgs = strings.concat(inputs).join('');
+  const className = useMemo(() => generateClassName(joinedArgs), [joinedArgs]);
+  const css = useMemo(() => generateCSS(className, strings, inputs), [className]);
 
   useLayoutEffect(() => subscribe(css), [className]);
   useEffect(() => () => unsubscribe(css), [className]);
@@ -26,29 +24,22 @@ export function useStyleWithoutCustomProps(strings: TemplateStringsArray, ...inp
 }
 
 export function useStyleWithCustomProps(strings: TemplateStringsArray, ...inputs: any[]): string {
-  const className = generateClassName(strings.join(''));
-  const customPropsClassName = generateClassName(inputs.join(''));
-  const [css, customPropsCSS] = useMemo(
-    () =>
-      riffleWithCustomProps(className, strings, inputs).map((arg, index) => {
-        if (index === 0) {
-          return stylis(`.${className}`, arg);
-        }
-
-        return `.${customPropsClassName}{${Object.keys(arg).reduce((memo: string, propKey: string) => {
-          return memo + `${propKey}: ${arg[propKey]};`;
-        }, '')}}`;
-      }),
-    [customPropsClassName]
+  const joinedStrings = strings.join('');
+  const joinedInputs = inputs.join('');
+  const sharedClassName = useMemo(() => generateClassName(joinedStrings), [joinedStrings]);
+  const variableClassName = useMemo(() => generateClassName(joinedInputs), [joinedInputs]);
+  const [sharedCSS, variableCSS] = useMemo(
+    () => generateCSSWithCustomProps(sharedClassName, variableClassName, strings, inputs),
+    [variableClassName]
   );
 
-  useLayoutEffect(() => subscribe(css));
-  useEffect(() => () => unsubscribe(css));
+  useLayoutEffect(() => subscribe(sharedCSS));
+  useLayoutEffect(() => subscribe(variableCSS), [variableClassName]);
 
-  useLayoutEffect(() => subscribe(customPropsCSS), [customPropsClassName]);
-  useEffect(() => () => unsubscribe(customPropsCSS), [customPropsClassName]);
+  useEffect(() => () => unsubscribe(sharedCSS));
+  useEffect(() => () => unsubscribe(variableCSS), [variableClassName]);
 
-  return `${className}${customPropsClassName ? ` ${customPropsClassName}` : ''}`;
+  return `${sharedClassName} ${variableClassName}`;
 }
 
 export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
