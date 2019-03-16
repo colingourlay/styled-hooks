@@ -1,4 +1,14 @@
-import { useStyle, useUnstableStyle } from './style';
+import { useStyle, useStyleWithCustomProps, useStyleWithoutCustomProps } from './style';
 import { ThemeConsumer, ThemeContext, ThemeProvider, useTheme } from './theme';
 
-export { ThemeConsumer, ThemeContext, ThemeProvider, useStyle, useTheme, useUnstableStyle };
+export {
+  // style
+  useStyle,
+  useStyleWithCustomProps,
+  useStyleWithoutCustomProps,
+  // theme
+  ThemeConsumer,
+  ThemeContext,
+  ThemeProvider,
+  useTheme
+};

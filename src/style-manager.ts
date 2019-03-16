@@ -31,7 +31,7 @@ function createStyleElement(options: { nonce: string | void }): HTMLStyleElement
   return tag;
 }
 
-export class StyleManager {
+class StyleManager {
   isSpeedy: boolean;
   ctr: number;
   tags: HTMLStyleElement[];
@@ -101,5 +101,32 @@ export class StyleManager {
         break;
       }
     }
+  }
+}
+
+const manager = new StyleManager({ container: document.head });
+const counts = new Map();
+
+export function subscribe(css: string) {
+  if (!counts.has(css)) {
+    counts.set(css, 1);
+    manager.add(css);
+  } else {
+    counts.set(css, counts.get(css) + 1);
+  }
+}
+
+export function unsubscribe(css: string) {
+  if (!counts.has(css)) {
+    return;
+  }
+
+  const count = counts.get(css);
+
+  if (count > 1) {
+    counts.set(css, count - 1);
+  } else {
+    counts.delete(css);
+    manager.remove(css);
   }
 }
