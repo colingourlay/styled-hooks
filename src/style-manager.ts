@@ -1,3 +1,6 @@
+import Stylis from '@emotion/stylis';
+import _insertRulePlugin from 'stylis-rule-sheet';
+
 function sheetForTag(tag: HTMLStyleElement): CSSStyleSheet {
   if (!tag.sheet) {
     // This weirdness brough./style-manageru by firefox
@@ -13,10 +16,10 @@ function sheetForTag(tag: HTMLStyleElement): CSSStyleSheet {
   return tag.sheet;
 }
 
-interface Options {
+interface StyleElementOptions {
   nonce?: string;
   container: HTMLElement;
-  speedy?: boolean;
+  isSpeedy?: boolean;
 }
 
 function createStyleElement(options: { nonce: string | void }): HTMLStyleElement {
@@ -31,6 +34,37 @@ function createStyleElement(options: { nonce: string | void }): HTMLStyleElement
   return tag;
 }
 
+// let parsingRules = [];
+
+// const returnRulesPlugin = (context: number) => {
+//   if (context === -2) {
+//     const parsedRules = parsingRules;
+
+//     parsingRules = [];
+
+//     return parsedRules;
+//   }
+// };
+
+// const parseRulesPlugin = _insertRulePlugin((rule: never) => {
+//   parsingRules.push(rule);
+// });
+
+// const splitter = new Stylis({
+//   global: false,
+//   cascade: true,
+//   keyframe: false,
+//   prefix: false,
+//   compress: false,
+//   semicolon: true
+// } as {});
+
+// splitter.use([parseRulesPlugin, returnRulesPlugin]);
+
+// function cssToRules(css: string): string[] {
+//   return splitter('', css);
+// }
+
 class StyleManager {
   isSpeedy: boolean;
   ctr: number;
@@ -39,8 +73,8 @@ class StyleManager {
   nonce: string | void;
   before: Element | null;
 
-  constructor(options: Options) {
-    this.isSpeedy = !!options.speedy;
+  constructor(options: StyleElementOptions) {
+    this.isSpeedy = !!options.isSpeedy;
     this.tags = [];
     this.ctr = 0;
     this.nonce = options.nonce;
@@ -72,9 +106,7 @@ class StyleManager {
         let isImportRule = rule.charCodeAt(1) === 105 && rule.charCodeAt(0) === 64;
 
         sheet.insertRule(rule, isImportRule ? 0 : sheet.cssRules.length);
-      } catch (e) {
-        tag.appendChild(document.createTextNode(rule));
-      }
+      } catch (e) {}
     } else {
       tag.appendChild(document.createTextNode(rule));
     }
@@ -104,12 +136,14 @@ class StyleManager {
   }
 }
 
-const manager = new StyleManager({ container: document.head });
+// const manager = new StyleManager({ container: document.head, isSpeedy: true });
+const manager = new StyleManager({ container: document.head, isSpeedy: false });
 const counts = new Map();
 
 export function subscribe(css: string) {
   if (!counts.has(css)) {
     counts.set(css, 1);
+    // cssToRules(css).map((rule: string) => manager.add(rule));
     manager.add(css);
   } else {
     counts.set(css, counts.get(css) + 1);
@@ -127,6 +161,7 @@ export function unsubscribe(css: string) {
     counts.set(css, count - 1);
   } else {
     counts.delete(css);
+    // cssToRules(css).map((rule: string) => manager.remove(rule));
     manager.remove(css);
   }
 }
