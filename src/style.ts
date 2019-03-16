@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo } from 'react';
-import { generateClassName } from './naming';
-import { subscribe, unsubscribe } from './style-manager';
+import { generateClassName } from './class-name';
 import { generateCSS, generateCSSWithCustomProps } from './css';
+import { subscribe, unsubscribe } from './style-manager';
 
 interface GlobalCSS {
   supports: Function;
