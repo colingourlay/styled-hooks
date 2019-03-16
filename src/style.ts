@@ -43,7 +43,7 @@ export function useStyleWithCustomProps(strings: TemplateStringsArray, ...inputs
 }
 
 export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
-  return (IS_BROWSER_ENVIRONMENT_THAT_SUPPORTS_CSS_CUSTOM_PROPERTIES
+  return (inputs.length > 0 && IS_BROWSER_ENVIRONMENT_THAT_SUPPORTS_CSS_CUSTOM_PROPERTIES
     ? useStyleWithCustomProps
     : useStyleWithoutCustomProps)(strings, ...inputs);
 }
