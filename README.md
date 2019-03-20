@@ -63,14 +63,4 @@ ReactDOM.render(
 </body>
 ```
 
-<svg width="100%" height="112" viewBox="0 0 100% 112" xmlns="http://www.w3.org/2000/svg">
-  <title>Image of magenta text on a yellow background</title>
-  <g fill="#ff0" stroke="none">
-    <rect x="0" y="0" width="100%" height="48" />
-    <rect x="0" y="64" width="100%" height="48" />
-  </g>
-  <g font-family="Times New Roman" font-size="16">
-    <text fill="#00f" x="16" y="28">I'm blue</text>
-    <text fill="#f0f" x="16" y="94">I'm magenta</text>
-  </g>
-</svg>
+![Image of blue and magenta paragraphs with yellow backgrounds](https://raw.githubusercontent.com/colingourlay/hook-style/master/static/getting-started-output.svg)
