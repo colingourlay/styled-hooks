@@ -1,88 +1,76 @@
 # hook-style
 
-Style and theme your React components with Hooks
+Style your React components with Hooks
 
 ```sh
-$ npm i hook-style
+npm install hook-style
 ```
-
-**Note**: This is nowhere near production-ready, or as flexible/powerful as existing CSS-in-JS libraries. I'm just scratching an itch for now. If I make this more useful, I'll shout about it.
-
-## Usage
 
 ```jsx
-import React, { useState } from 'react';
+import { useStyle } from 'hook-style';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider, useStyle, useTheme } from 'hook-style';
 
-function App() {
-  const [theme, setTheme] = useState({
-    bg: '#ffffff',
-    fg: '#000000',
-    marginRem: 1
-  });
-
-  const className = useStyle`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: ${theme.bg};
-    box-sizing: border-box;
-    min-height: 100vh;
+function Paragraph({ color, ...props }) {
+  const cn = useStyle`
+    padding: 1rem;
+    background-color: yellow;
+    color: ${color};
+    font-size: 1.5rem;
   `;
 
-  function updateColors(e) {
-    const { pageX, pageY } = e.touches ? e.touches[0] : e;
-
-    setTheme({
-      bg: hsl2hex(pageX / window.innerWidth, 0.25, 0.9),
-      fg: hsl2hex(pageY / window.innerHeight, 0.5, 0.5)
-    });
-  }
-
-  return (
-    <ThemeProvider theme={theme}>
-      <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
-        <Button primary>Primary</Button>
-        <Button>Standard</Button>
-      </div>
-    </ThemeProvider>
-  );
+  return <p className={cn} {...props} />;
 }
 
-function Button({ primary, children }) {
-  const { bg, fg } = useTheme();
-
-  const className = useStyle`
-    display: inline-block;
-    border-radius: 0.125rem;
-    padding: 0.5rem 0;
-    margin: 1rem;
-    width: 10rem;
-    background-color: ${primary ? fg : 'transparent'};
-    color: ${primary ? bg : fg};
-    border: 0.125rem solid ${fg};
-
-    @media (min-width: 32rem) {
-      padding: 0.75rem 0;
-      width: 15rem;
-      font-size: 1.5rem;
-    }
-
-    &:focus {
-      color: #000;
-      border-color: #000;
-    }
-  `;
-
-  return <button className={className}>{children}</button>;
-}
-
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <div>
+    <Paragraph color="magenta">I'm magenta</Paragraph>
+    <Paragraph color="blue">I'm blue</Paragraph>
+  </div>,
+  document.getElementById('root')
+);
 ```
 
-## Authors
+[Play with this 👆️ on **Glitch** ✨](https://glitch.com/~hook-style-getting-started) or have a look at what gets rendered 👇
 
-- Colin Gourlay ([colin@colin-gourlay.com](mailto:colin@colin-gourlay.com))
+```html
+<head>
+  <style>
+    .gtXozB {
+      padding: 1rem;
+      background-color: yellow;
+      color: var(--gtXozB-0);
+    }
+  </style>
+  <style>
+    .gqAIHm {
+      --gtXozB-0: blue;
+    }
+  </style>
+  <style>
+    .eKigJM {
+      --gtxozb-0: magenta;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div>
+      <h1 class="gtXozB gqAIHm">I'm blue</h1>
+      <h1 class="gtXozB eKigJM">I'm magenta</h1>
+    </div>
+  </div>
+</body>
+```
+
+<svg width="100%" height="112" viewBox="0 0 100% 112" xmlns="http://www.w3.org/2000/svg">
+  <title>Image of magenta text on a yellow background</title>
+  <g fill="#ff0" stroke="none">
+    <rect x="0" y="0" width="100%" height="48" />
+    <rect x="0" y="64" width="100%" height="48" />
+  </g>
+  <g font-family="Times New Roman" font-size="16">
+    <text fill="#00f" x="16" y="28">I'm blue</text>
+    <text fill="#f0f" x="16" y="94">I'm magenta</text>
+  </g>
+</svg>
