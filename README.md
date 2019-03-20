@@ -53,7 +53,7 @@ ReactDOM.render(
   }
 </style>
 
-<!-- In <div id="root"> -->
+<!-- In <div id="root" /> -->
 <div>
   <p class="gtXozB gqAIHm">I'm blue</p>
   <p class="gtXozB eKigJM">I'm magenta</p>
