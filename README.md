@@ -34,33 +34,30 @@ ReactDOM.render(
 [Play with this 👆️ on **Glitch** ✨](https://glitch.com/~hook-style-getting-started) or have a look at what gets rendered 👇
 
 ```html
-<head>
-  <style>
-    .gtXozB {
-      padding: 1rem;
-      background-color: yellow;
-      color: var(--gtXozB-0);
-    }
-  </style>
-  <style>
-    .gqAIHm {
-      --gtXozB-0: blue;
-    }
-  </style>
-  <style>
-    .eKigJM {
-      --gtxozb-0: magenta;
-    }
-  </style>
-</head>
-<body>
-  <div id="root">
-    <div>
-      <h1 class="gtXozB gqAIHm">I'm blue</h1>
-      <h1 class="gtXozB eKigJM">I'm magenta</h1>
-    </div>
-  </div>
-</body>
+<!-- In <head /> -->
+<style>
+  .gtXozB {
+    padding: 1rem;
+    background-color: yellow;
+    color: var(--gtXozB-0);
+  }
+</style>
+<style>
+  .gqAIHm {
+    --gtXozB-0: blue;
+  }
+</style>
+<style>
+  .eKigJM {
+    --gtxozb-0: magenta;
+  }
+</style>
+
+<!-- In <div id="root"> -->
+<div>
+  <p class="gtXozB gqAIHm">I'm blue</p>
+  <p class="gtXozB eKigJM">I'm magenta</p>
+</div>
 ```
 
 ![Image of blue and magenta paragraphs with yellow backgrounds](https://raw.githubusercontent.com/colingourlay/hook-style/master/static/getting-started-output.svg?sanitize=true)
