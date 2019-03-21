@@ -63,15 +63,17 @@ ReactDOM.render(
 ![Image of blue and magenta paragraphs with yellow backgrounds](https://raw.githubusercontent.com/colingourlay/hook-style/master/static/getting-started-output.svg?sanitize=true)
 
 <details>
-    <summary>What about browsers that don't support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties</a>?</summary>
-    <p>Don't worry! `hook-style` will render the following in browsers that aren't up to scratch:</p>
-<pre><code>
-<!-- In <head /> -->
+  <summary>What about browsers that don't support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties</a>?</summary>
+  
+Don't worry! `hook-style` will render the following in browsers that aren't up to scratch:
+
+```html
+<!-- In <div id="root" /> -->
 <style>
-  .efNhRD{
-    padding:1rem;
-    background-color:yellow;
-    color:blue;
+  .efNhRD {
+    padding: 1rem;
+    background-color: yellow;
+    color: blue;
   }
 </style>
 <style>
@@ -87,7 +89,10 @@ ReactDOM.render(
   <p class="efNhRD">I'm blue</p>
   <p class="kGJulO">I'm magenta</p>
 </div>
-</code></pre>
-    <p>The amount of CSS generated is larger, but it acheives the same effect.</p>
-    <p>If you want to use this output in _all_ browsers, use the `useStyleWithoutCustomProps` hook. On the other hand, if you can guarantee your app wont be run in older browsers, you can skip the support check by using the `useStyleWithCustomProps` hook directly.</p>
+```
+
+The amount of CSS generated is larger, but it acheives the same effect.
+
+If you want to use this output in _all_ browsers, use the `useStyleWithoutCustomProps` hook. On the other hand, if you can guarantee your app wont be run in older browsers, you can skip the support check by using the `useStyleWithCustomProps` hook directly.
+
 </details>
