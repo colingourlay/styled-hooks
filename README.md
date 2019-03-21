@@ -68,7 +68,7 @@ ReactDOM.render(
 Don't worry! `hook-style` will render the following in browsers that aren't up to scratch:
 
 ```html
-<!-- In <div id="root" /> -->
+<!-- In <head /> -->
 <style>
   .efNhRD {
     padding: 1rem;
