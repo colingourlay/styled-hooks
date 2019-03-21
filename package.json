@@ -1,11 +1,13 @@
 {
   "name": "hook-style",
-  "version": "1.5.0",
-  "description": "Style and theme your React components with Hooks",
+  "version": "1.5.1",
+  "description": "Style your React components with Hooks",
   "keywords": [
-    "react hook",
     "style",
-    "tagged template"
+    "theme",
+    "react",
+    "components",
+    "hooks"
   ],
   "license": "Unlicense",
   "contributors": [

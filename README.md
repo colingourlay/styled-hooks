@@ -41,7 +41,7 @@ ReactDOM.render(
 
 <p>
   <a href="https://glitch.com/edit/#!/remix/hook-style-getting-started">
-    <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33" style="vertical-align: middle;">
+    <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
   </a>&ensp;or have a look at what gets rendered 👇
 </p>
 
@@ -115,9 +115,11 @@ On the other hand, if you can guarantee your app wont be run in older browsers, 
 
 ### `useStyle`
 
-The `useStyle` hook accepts a [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) containing CSS & dynamic values, and returns a `className` you can use in your component.
+The `useStyle` hook is a [tagged template](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that expects CSS & dynamic values, and returns a `className` you can use in your component.
 
-The hook will inject CSS into your document's `<head>` during the browser's layout phase, so your components will always be painted fully-styled.
+The hook will memoise the CSS each unique style variant, and inject it into your document's `<head>`, taking advantage of CSS Custom Properties (if your browser suports them) to reduce style replication.
+
+Style injection happens during the browser's layout phase, so your components will always be painted fully-styled.
 
 Thanks to [`stylis`](https://github.com/thysultan/stylis.js), you can use some basic nesting and media queries:
 
