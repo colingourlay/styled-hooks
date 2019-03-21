@@ -16,7 +16,6 @@ function Paragraph({ color, ...props }) {
     padding: 1rem;
     background-color: yellow;
     color: ${color};
-    font-size: 1.5rem;
   `;
 
   return <p className={cn} {...props} />;
