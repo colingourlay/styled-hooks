@@ -63,7 +63,7 @@ ReactDOM.render(
 ![Image of blue and magenta paragraphs with yellow backgrounds](https://raw.githubusercontent.com/colingourlay/hook-style/master/static/getting-started-output.svg?sanitize=true)
 
 <details>
-  <summary>What about browsers that don't support <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties</a>?</summary>
+  <summary>“Wait. Those are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties</a>. I thought they didn't work everywhere?”</summary><br>
   
 Don't worry! `hook-style` will render the following in browsers that aren't up to scratch:
 
@@ -93,6 +93,8 @@ Don't worry! `hook-style` will render the following in browsers that aren't up t
 
 The amount of CSS generated is larger, but it acheives the same effect.
 
-If you want to use this output in _all_ browsers, use the `useStyleWithoutCustomProps` hook. On the other hand, if you can guarantee your app wont be run in older browsers, you can skip the support check by using the `useStyleWithCustomProps` hook directly.
+If you want to use this output in _all_ browsers, use the `useStyleWithoutCustomProps` hook.
+
+On the other hand, if you can guarantee your app wont be run in older browsers, you can skip the support check by using the `useStyleWithCustomProps` hook directly.
 
 </details>
