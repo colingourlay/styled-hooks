@@ -1,4 +1,4 @@
-# hook-style
+# styled-hooks
 
 Style your React components with Hooks
 
@@ -12,11 +12,11 @@ Style your React components with Hooks
 ## Getting started
 
 ```sh
-npm install hook-style
+npm install styled-hooks
 ```
 
 ```jsx
-import { useStyle } from 'hook-style';
+import { useStyle } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -40,9 +40,9 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/hook-style-getting-started">
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-getting-started">
     <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
-  </a>&ensp;or have a look at what gets rendered 👇
+  </a>&ensp;or have a look at what got rendered 👇
 </p>
 
 ```html
@@ -72,12 +72,12 @@ ReactDOM.render(
 </div>
 ```
 
-![Image of blue and magenta paragraphs with yellow backgrounds](https://raw.githubusercontent.com/colingourlay/hook-style/master/static/getting-started-output.svg?sanitize=true)
+![Image of blue and magenta paragraphs with yellow backgrounds](https://raw.githubusercontent.com/colingourlay/styled-hooks/master/static/getting-started-output.svg?sanitize=true)
 
 <details>
   <summary>“Wait. Those are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties</a>. I thought they didn't work everywhere?”</summary><br>
   
-Don't worry! `hook-style` will render the following in browsers that aren't up to scratch:
+Don't worry! `styled-hooks` will render the following in browsers that aren't up to scratch:
 
 ```html
 <!-- In <head /> -->
@@ -124,7 +124,7 @@ Style injection happens during the browser's layout phase, so your components wi
 Thanks to [`stylis`](https://github.com/thysultan/stylis.js), you can use some basic nesting and media queries:
 
 ```jsx
-import { useStyle } from 'hook-style';
+import { useStyle } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -162,7 +162,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/hook-style-api-usestyle">
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle">
     <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
   </a>
 </p>
@@ -172,7 +172,7 @@ ReactDOM.render(
 The `useTheme` hook allows you to read the theme context from the nearest `<ThemeProvider />` ancestor:
 
 ```jsx
-import { useStyle, useTheme, ThemeProvider } from 'hook-style';
+import { useStyle, useTheme, ThemeProvider } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -197,7 +197,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/hook-style-api-usetheme-1">
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-1">
     <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
   </a>
 </p>
@@ -205,7 +205,7 @@ ReactDOM.render(
 Combine this with React's `useState` hook, and you'll be able to modify the theme on the fly:
 
 ```jsx
-import { useStyle, useTheme, ThemeProvider } from 'hook-style';
+import { useStyle, useTheme, ThemeProvider } from 'styled-hooks';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -250,7 +250,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 <p>
-<a href="https://glitch.com/edit/#!/remix/hook-style-api-usetheme-2">
-  <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
-</a>
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2">
+    <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
+  </a>
 </p>

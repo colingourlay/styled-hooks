@@ -1,5 +1,5 @@
 {
-  "name": "hook-style",
+  "name": "styled-hooks",
   "version": "1.5.1",
   "description": "Style your React components with Hooks",
   "keywords": [
@@ -15,11 +15,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/colingourlay/hook-style.git"
+    "url": "git+https://github.com/colingourlay/styled-hooks.git"
   },
-  "main": "dist/hook-style.js",
-  "module": "dist/hook-style.mjs",
-  "source": "src/hook-style.ts",
+  "main": "dist/styled-hooks.js",
+  "module": "dist/styled-hooks.mjs",
+  "source": "src/styled-hooks.ts",
   "files": [
     "dist"
   ],
