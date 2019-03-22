@@ -1,7 +1,7 @@
 declare var React;
 declare var ReactDOM;
 const { useEffect, useState } = React;
-import { ThemeProvider, useStyle, useTheme } from '../../src/hook-style';
+import { ThemeProvider, useStyle, useTheme } from '../../src/styled-hooks';
 import { hsl2hex } from './color';
 
 interface ButtonProps {
