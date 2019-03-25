@@ -18,7 +18,7 @@
     "url": "git+https://github.com/colingourlay/styled-hooks.git"
   },
   "main": "dist/styled-hooks.js",
-  "module": "dist/styled-hooks.mjs",
+  "module": "dist/styled-hooks.m.js",
   "source": "src/styled-hooks.ts",
   "files": [
     "dist"
