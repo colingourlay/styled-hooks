@@ -259,7 +259,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ## About the project
 
 - `styled-hooks` is currently maintained by [Colin Gourlay](https://colin-gourlay.com)
-- It is currently licenced under the [Unlicence license](LICENSE)
+- It is currently licensed under [The Unlicense](LICENSE)
 - If you'd like to help out, please submit ideas & bugs to the project's [issue tracker](https://github.com/colingourlay/styled-hooks/issues)
 - To contribute code and documentation, please see the [contribution guide](CONTRBUTING.md)
 - All contributions and project activity are subject to the project's [Code of Conduct](CODE_OF_CONDUCT.md)

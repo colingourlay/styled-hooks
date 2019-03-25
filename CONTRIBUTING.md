@@ -45,4 +45,4 @@ Please submit pull requests to initiate discussions about your contributions, an
 
 ## License
 
-By contributing to `styled-hooks`, you agree that your contributions will be licensed under its [Unlicense license](LICENSE).
+By contributing to `styled-hooks`, you agree that your contributions will be licensed under [The Unlicense](LICENSE).
