@@ -8,6 +8,7 @@ Style your React components with Hooks
 - [API](#api)
   - [Generating `className`s with the `useStyle` hook](#usestyle)
   - [Theming with `<ThemeProvider/>` and the `useTheme` hook](#usetheme)
+- [About the project](#about-the-project)
 
 ## Getting started
 
@@ -254,3 +255,11 @@ ReactDOM.render(<App />, document.getElementById('root'));
     <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
   </a>
 </p>
+
+## About the project
+
+- `styled-hooks` is currently maintained by [Colin Gourlay](https://colin-gourlay.com)
+- It is currently licenced under the [Unlicence license](LICENSE)
+- If you'd like to help out, please submit ideas & bugs to the project's [issue tracker](https://github.com/colingourlay/styled-hooks/issues)
+- To contribute code and documentation, please see the [contribution guide](CONTRBUTING.md)
+- All contributions and project activity are subject to the project's [Code of Conduct](CODE_OF_CONDUCT.md)
