@@ -1,6 +1,11 @@
-# styled-hooks
-
-Style your React components with Hooks
+<h1 align="center">Styled Hooks</h1>
+<p align="center">Style your React components with Hooks</p>
+<p align="center">
+  <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM latest published version" src="https://img.shields.io/npm/v/styled-hooks.svg?color=magenta"></a> 
+  <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/styled-hooks.svg?color=magenta"></a> 
+  <img alt="GZip size" src="https://img.shields.io/badge/gzip%20size-4.8%20kB-magenta.svg">
+  <img alt="Formats: CommonJS, ECMAScript Modules" src="https://img.shields.io/badge/formats-cjs%2C%20esm-magenta.svg">
+</p>
 
 ## Table of contents
 
@@ -78,7 +83,7 @@ ReactDOM.render(
 <details>
   <summary>“Wait. Those are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties</a>. I thought they didn't work everywhere?”</summary><br>
   
-Don't worry! `styled-hooks` will render the following in browsers that aren't up to scratch:
+Don't worry! Styled Hooks will render the following in browsers that aren't up to scratch:
 
 ```html
 <!-- In <head /> -->
@@ -258,7 +263,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## About the project
 
-- `styled-hooks` is currently maintained by [Colin Gourlay](https://colin-gourlay.com)
+- Styled Hooks is currently maintained by [Colin Gourlay](https://colin-gourlay.com)
 - It is currently licensed under [The Unlicense](LICENSE)
 - If you'd like to help out, please submit ideas & bugs to the project's [issue tracker](https://github.com/colingourlay/styled-hooks/issues)
 - To contribute code and documentation, please see the [contribution guide](CONTRIBUTING.md)

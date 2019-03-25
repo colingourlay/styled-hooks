@@ -5,7 +5,7 @@ Contributions are always welcome, no matter how large or small. Before contribut
 ## Setup
 
 1. Ensure your environment is running Node.js 10+
-2. Git clone the [`styled-hooks` repository](https://github.com/colingourlay/styled-hooks).
+2. Git clone the Styled Hooks [repository](https://github.com/colingourlay/styled-hooks).
 3. From the root of the repository, run `npm i` to install development dependencies.
 
 ## Development
@@ -45,4 +45,4 @@ Please submit pull requests to initiate discussions about your contributions, an
 
 ## License
 
-By contributing to `styled-hooks`, you agree that your contributions will be licensed under [The Unlicense](LICENSE).
+By contributing to Styled Hooks, you agree that your contributions will be licensed under [The Unlicense](LICENSE).
