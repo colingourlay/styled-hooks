@@ -37,7 +37,7 @@ The build process uses [`microbundle`](https://github.com/developit/microbundle)
 
 Please submit pull requests to initiate discussions about your contributions, and allow us to merge them!
 
-1. Fork the repo and create your branch from master.
+1. Fork the repo and create your branch from `master`.
 2. If you’ve changed APIs, update the documentation.
 3. Make sure your code lints.
 4. Push your changes to your own fork.
