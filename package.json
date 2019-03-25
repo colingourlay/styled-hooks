@@ -29,7 +29,7 @@
     "example:watch": "microbundle watch --no-compress --entry example/src/index.tsx --external=@emotion/stylis=Stylis --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
     "clean": "rimraf dist",
     "watch": "npm run clean && microbundle watch --no-compress --format cjs,es",
-    "build": "npm run clean && microbundle --no-compress --format cjs,es --sourcemap=false",
+    "build": "npm run clean && microbundle --format cjs,es --sourcemap=false",
     "prepare": "npm run build"
   },
   "devDependencies": {
