@@ -1,18 +1,15 @@
 <h1 align="center">Styled Hooks</h1>
 <p align="center">Style your React components with Hooks</p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM latest published version" src="https://img.shields.io/npm/v/styled-hooks.svg?color=magenta"></a> 
-  <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/styled-hooks.svg?color=magenta"></a> 
-  <img alt="GZip size" src="https://img.shields.io/badge/gzip%20size-4.8%20kB-magenta.svg">
-  <img alt="Formats: CommonJS, ECMAScript Modules" src="https://img.shields.io/badge/formats-cjs%2C%20esm-magenta.svg">
+  <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM latest published version" src="https://img.shields.io/npm/v/styled-hooks.svg?style=flat-square&color=f0f"></a> <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/styled-hooks.svg?style=flat-square&color=f0f"></a> <img alt="GZip size" src="https://img.shields.io/badge/gzip%20size-4.8%20kB-f0f.svg?style=flat-square"> <img alt="Formats: CommonJS, ECMAScript Modules" src="https://img.shields.io/badge/formats-cjs%2C%20esm-f0f.svg?style=flat-square">
 </p>
 
 ## Table of contents
 
 - [Getting started](#getting-started)
 - [API](#api)
-  - [Generating `className`s with the `useStyle` hook](#usestyle)
-  - [Theming with `<ThemeProvider/>` and the `useTheme` hook](#usetheme)
+  - [`useStyle`](#usestyle) - Generating a `className`
+  - [`useTheme`](#usetheme) - Consuming a `<ThemeProvider/>`
 - [About the project](#about-the-project)
 
 ## Getting started
