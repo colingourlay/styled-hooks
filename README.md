@@ -1,4 +1,4 @@
-<h1 align="center">Styled Hooks</h1>
+<h1 align="center"><img title="Styled Hooks" alt="Styled Hooks" src="https://raw.githubusercontent.com/colingourlay/styled-hooks/master/static/logo.svg?sanitize=true" /></h1>
 <p align="center">Style your React components with Hooks</p>
 <p align="center">
   <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM latest published version" src="https://img.shields.io/npm/v/styled-hooks.svg?style=flat-square&color=f0f"></a> <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/styled-hooks.svg?style=flat-square&color=f0f"></a> <img alt="GZip size" src="https://img.shields.io/badge/gzip%20size-4.8%20kB-f0f.svg?style=flat-square"> <img alt="Formats: CommonJS, ECMAScript Modules" src="https://img.shields.io/badge/formats-cjs%2C%20esm-f0f.svg?style=flat-square">
