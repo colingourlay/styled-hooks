@@ -28,7 +28,7 @@ You can build the project by running:
 npm run build
 ```
 
-The build process uses [`microbundle`](https://github.com/developit/microbundle) to create two artifacts from the `src/styled-hooks.js` entry point:
+The build process uses [`microbundle`](https://github.com/developit/microbundle) to create two artifacts from the `src/styled-hooks.ts` entry point:
 
 - `dist/styled-hooks.js` for `require()`-ing with CommonJS
 - `dist/styled-hooks.m.js` for `import`-ing as an ECMAScript Module
