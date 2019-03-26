@@ -43,9 +43,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-getting-started">
-    <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
-  </a>&ensp;or have a look at what got rendered 👇
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-getting-started"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a><sup><sup><big><big>&ensp;or take a look at the rendered output 👇</big></big></sup></sup>
 </p>
 
 ```html
@@ -165,9 +163,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle">
-    <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
-  </a>
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 ### `useTheme`
@@ -200,9 +196,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-1">
-    <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
-  </a>
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 Combine this with React's `useState` hook, and you'll be able to modify the theme on the fly:
@@ -253,9 +247,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2">
-    <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33">
-  </a>
+  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 ## About the project
