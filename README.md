@@ -8,8 +8,8 @@
 
 - [Getting started](#getting-started)
 - [API](#api)
-  - [`useStyle`](#usestyle) - Generating a `className`
-  - [`useTheme`](#usetheme) - Consuming a `<ThemeProvider/>`
+  - [`useStyle`](#usestyle)
+  - [`useTheme`](#usetheme)
 - [About the project](#about-the-project)
 
 ## Getting started
