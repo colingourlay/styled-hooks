@@ -10,7 +10,7 @@ interface GlobalCSS {
 declare var CSS: GlobalCSS;
 
 const IS_BROWSER_ENVIRONMENT_THAT_SUPPORTS_CSS_CUSTOM_PROPERTIES =
-  CSS && CSS.supports && CSS.supports(`--custom: var(--properties)`);
+  window['CSS'] && CSS.supports && CSS.supports(`--custom: var(--properties)`);
 
 export function useStyleWithoutCustomProps(strings: TemplateStringsArray, ...inputs: any[]): string {
   const joinedArgs = strings.concat(inputs).join('');
