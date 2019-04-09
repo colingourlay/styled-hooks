@@ -1,6 +1,6 @@
 {
   "name": "styled-hooks",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Style your React components with Hooks",
   "keywords": [
     "style",
@@ -23,6 +23,12 @@
   "files": [
     "dist"
   ],
+  "git": {
+    "tagName": "${version}"
+  },
+  "github": {
+    "release": true
+  },
   "scripts": {
     "start": "concurrently -k \"npm:example:*\"",
     "example:serve": "http-server example --silent",
@@ -30,13 +36,15 @@
     "clean": "rimraf dist",
     "watch": "npm run clean && microbundle watch --no-compress --format cjs,es",
     "build": "npm run clean && microbundle --format cjs,es --sourcemap=false",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "release": "release-it"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
     "http-server": "^0.11.1",
     "microbundle": "^0.11.0",
     "react": "^16.8.4",
+    "release-it": "^10.3.1",
     "rimraf": "^2.6.3"
   },
   "peerDependencies": {
