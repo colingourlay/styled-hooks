@@ -1,7 +1,7 @@
 declare var React;
 declare var ReactDOM;
 const { useEffect, useState } = React;
-import { ThemeProvider, useStyle, useTheme } from '../../src/styled-hooks';
+import { ThemeProvider, injectGlobal, useStyle, useTheme } from '../../src/styled-hooks';
 import { hsl2hex } from './color';
 
 interface ButtonProps {
@@ -99,5 +99,14 @@ function App() {
     </ThemeProvider>
   );
 }
+
+injectGlobal`
+  body {
+    margin: 0;
+  }
+  button {
+    font-size: 1rem;
+  }
+`;
 
 ReactDOM.render(<App />, document.getElementById('app'));

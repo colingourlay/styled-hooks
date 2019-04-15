@@ -10,6 +10,7 @@
 - [API](#api)
   - [`useStyle`](#usestyle)
   - [`useTheme`](#usetheme)
+  - [`injectGlobal`](#injectglobal)
 - [About the project](#about-the-project)
 
 ## Getting started
@@ -251,6 +252,20 @@ ReactDOM.render(<App />, document.getElementById('root'));
 <p>
   <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
+
+### `injectGlobal`
+
+This works as you'd expect it to:
+
+```js
+injectGlobal`
+  body {
+    margin: 0;
+  }
+`;
+```
+
+...will add the CSS you write to the document. You can use any interpolated values you want, but unlike hooks they won't become CSS Custom Properties.
 
 ## About the project
 

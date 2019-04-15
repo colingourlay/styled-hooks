@@ -9,14 +9,14 @@ const customPropsRule = (className: string, customProps: {}) =>
     return memo + `${key}:${customProps[key]};`;
   }, '')}}`;
 
-export function generateCSS(className: string, strings: TemplateStringsArray, values: any[]): string {
+export function generateCSS(className: string | null, strings: TemplateStringsArray, values: any[]): string {
   let input = '';
 
   for (let i = 0, len = strings.length; i < len; i++) {
     input += strings[i] + String(values[i] == null ? '' : values[i]);
   }
 
-  return stylis(`.${className}`, input);
+  return stylis(className ? `.${className}` : '', input);
 }
 
 export function generateCSSWithCustomProps(
