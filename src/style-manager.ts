@@ -3,7 +3,7 @@ import _insertRulePlugin from 'stylis-rule-sheet';
 
 function sheetForTag(tag: HTMLStyleElement): CSSStyleSheet {
   if (!tag.sheet) {
-    // This weirdness brough./style-manageru by firefox
+    // This weirdness brought to you by firefox
     for (let i = 0; i < document.styleSheets.length; i++) {
       if (document.styleSheets[i].ownerNode === tag) {
         // @ts-ignore
