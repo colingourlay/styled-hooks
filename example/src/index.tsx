@@ -1,8 +1,28 @@
 declare var React;
 declare var ReactDOM;
 const { useEffect, useState } = React;
-import { ThemeProvider, injectGlobal, useStyle, useTheme } from '../../src/styled-hooks';
+import { ThemeProvider, injectGlobal, useStyle, useTheme, useThemedStyle } from '../../src/styled-hooks';
 import { hsl2hex } from './color';
+
+interface TitleProps {
+  children?: any[];
+}
+
+function Title({ children }: TitleProps) {
+  const className = useThemedStyle`
+    margin: $margin;
+    padding: 1rem 0;
+    width: 10rem;
+    background-color: $fg;
+    color: $bg;
+
+    @media (min-width: 32rem) {
+      width: 15rem;
+    }
+  `;
+
+  return <h1 className={className}>{children}</h1>;
+}
 
 interface ButtonProps {
   primary?: boolean;
@@ -58,6 +78,7 @@ function App() {
   const [theme, setTheme] = useState({
     bg: '#fff',
     fg: '#000',
+    margin: '1rem',
     marginRem: 1
   });
 
@@ -91,6 +112,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
+        <Title>Styled Hooks</Title>
         <Button primary={activeIndex === 0}>First</Button>
         <Button primary={activeIndex === 1}>Second</Button>
         <Button primary={activeIndex === 2}>Third</Button>

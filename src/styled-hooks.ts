@@ -1,5 +1,5 @@
 import { injectGlobal } from './global';
-import { useStyle, useStyleWithCustomProps, useStyleWithoutCustomProps } from './style';
+import { useStyle, useStyleWithCustomProps, useStyleWithoutCustomProps, useThemedStyle } from './style';
 import { ThemeConsumer, ThemeContext, ThemeProvider, useTheme } from './theme';
 
 export {
@@ -9,6 +9,7 @@ export {
   useStyle,
   useStyleWithCustomProps,
   useStyleWithoutCustomProps,
+  useThemedStyle,
   // theme
   ThemeConsumer,
   ThemeContext,

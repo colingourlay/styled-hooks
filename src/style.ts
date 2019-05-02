@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useMemo } from 'react';
 import { generateClassName } from './class-name';
 import { generateCSS, generateCSSWithCustomProps } from './css';
 import { subscribe, unsubscribe } from './style-manager';
+import { useTheme } from './theme';
 
 interface GlobalCSS {
   supports: Function;
@@ -45,5 +46,47 @@ export function useStyleWithCustomProps(strings: TemplateStringsArray, ...inputs
 export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   return (inputs.length > 0 && IS_BROWSER_ENVIRONMENT_THAT_SUPPORTS_CSS_CUSTOM_PROPERTIES
     ? useStyleWithCustomProps
-    : useStyleWithoutCustomProps)(strings, ...inputs);
+    : useStyleWithoutCustomProps)(strings as TemplateStringsArray, ...inputs);
+}
+
+type LooseTemplateStringsArray = string[] | TemplateStringsArray;
+
+export function useThemedStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
+  const theme = (useTheme() || {}) as {};
+  const themeKeys = Object.keys(theme).sort((a, b) => b.length - a.length);
+  let argsForUseStyle: [LooseTemplateStringsArray, ...any[]];
+
+  if (themeKeys.length) {
+    const themedStrings: string[] = [];
+    const themedInputs: any[] = [];
+    const themeInterpolationPattern = new RegExp(`\\$${themeKeys.join('|\\$')}`, 'g');
+
+    for (let i = 0, len = strings.length; i < len; i++) {
+      const currentString = strings[i];
+      let lastOffset = 0;
+
+      currentString.replace(themeInterpolationPattern, (match: string, offset: number) => {
+        themedStrings.push(currentString.slice(lastOffset, offset));
+        themedInputs.push(theme[match.slice(1)]);
+        lastOffset = offset + match.length;
+
+        return match;
+      });
+      themedStrings.push(currentString.slice(lastOffset, currentString.length));
+
+      const currentInput = inputs[i];
+
+      if (typeof currentInput === 'function') {
+        themedInputs.push(currentInput(theme));
+      } else if (currentInput != null) {
+        themedInputs.push(currentInput);
+      }
+    }
+
+    argsForUseStyle = [themedStrings, ...themedInputs];
+  } else {
+    argsForUseStyle = [strings, ...inputs];
+  }
+
+  return useStyle.apply(null, argsForUseStyle);
 }
