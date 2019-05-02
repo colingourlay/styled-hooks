@@ -49,11 +49,33 @@ export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): strin
     : useStyleWithoutCustomProps)(strings as TemplateStringsArray, ...inputs);
 }
 
+function deepKeys(obj: {}): string[] {
+  function getKeys(obj) {
+    return Object.keys(obj).reduce((memo, key) => {
+      const value = obj[key];
+
+      return memo.concat(value === Object(value) ? getKeys(value).map(nestedKey => `${key}.${nestedKey}`) : [key]);
+    }, []);
+  }
+
+  return getKeys(obj);
+}
+
+const PERIODS_PATTERN = /\./g;
+
+function countPeriods(string: string): number {
+  return (string.match(PERIODS_PATTERN) || []).length;
+}
+
+function themeKeysOrder(a, b) {
+  return (b.length << countPeriods(b)) - (a.length << countPeriods(a));
+}
+
 type LooseTemplateStringsArray = string[] | TemplateStringsArray;
 
 export function useThemedStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   const theme = (useTheme() || {}) as {};
-  const themeKeys = Object.keys(theme).sort((a, b) => b.length - a.length);
+  const themeKeys = deepKeys(theme).sort(themeKeysOrder);
   let argsForUseStyle: [LooseTemplateStringsArray, ...any[]];
 
   if (themeKeys.length) {

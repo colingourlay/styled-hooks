@@ -10,8 +10,8 @@ interface TitleProps {
 
 function Title({ children }: TitleProps) {
   const className = useThemedStyle`
-    margin: $margin;
-    padding: 1rem 0;
+    margin: $space.3;
+    padding: ${({ space }) => `${space[3]} ${space[0]}`};
     width: 10rem;
     background-color: $fg;
     color: $bg;
@@ -78,8 +78,8 @@ function App() {
   const [theme, setTheme] = useState({
     bg: '#fff',
     fg: '#000',
-    margin: '1rem',
-    marginRem: 1
+    marginRem: 1, // for testing unit resolution
+    space: ['0', '0.25rem', '0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem', '32rem']
   });
 
   const className = useStyle`
