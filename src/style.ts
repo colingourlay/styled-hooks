@@ -49,7 +49,7 @@ export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): strin
     : useStyleWithoutCustomProps)(strings as TemplateStringsArray, ...inputs);
 }
 
-const THEMED_STYLE_VARIABLE_PATTERN = /\$\w+(?:\.\w+)*/g;
+const THEMED_STYLE_VARIABLE_PATTERN = /#{[\w_\.]+}/g;
 
 function delve(current: any, path: string) {
   const parts = path.split('.');
@@ -71,11 +71,11 @@ export function useThemedStyle(strings: TemplateStringsArray, ...inputs: any[]):
     let lastOffset = 0;
 
     currentString.replace(THEMED_STYLE_VARIABLE_PATTERN, (match: string, offset: number) => {
-      const path = match.slice(1);
+      const path = match.slice(2, -1).trim();
       const value = delve(theme, path);
 
-      if (value == null) {
-        throw new Error(`Theme does not have a value at ${path}`);
+      if (typeof value !== 'string' && typeof value !== 'number') {
+        throw new Error(`Theme does not have a valid value at: ${path}`);
       }
 
       themedStrings.push(currentString.slice(lastOffset, offset));

@@ -10,11 +10,11 @@ interface TitleProps {
 
 function Title({ children }: TitleProps) {
   const className = useThemedStyle`
-    margin: $space.3 0 $space.0;
+    margin: #{space.3} 0 #{space.0};
     padding: ${({ space }) => `${space[3]} ${space[0]}`};
     width: 10rem;
-    background-color: $colors.fg;
-    color: $colors.bg;
+    background-color: #{colors.fg};
+    color: #{colors.bg};
 
     @media (min-width: 32rem) {
       width: 15rem;
