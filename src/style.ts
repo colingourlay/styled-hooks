@@ -49,66 +49,51 @@ export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): strin
     : useStyleWithoutCustomProps)(strings as TemplateStringsArray, ...inputs);
 }
 
-function deepKeys(obj: {}): string[] {
-  function getKeys(obj) {
-    return Object.keys(obj).reduce((memo, key) => {
-      const value = obj[key];
+const THEMED_STYLE_VARIABLE_PATTERN = /\$\w+(?:\.\w+)*/g;
 
-      return memo.concat(value === Object(value) ? getKeys(value).map(nestedKey => `${key}.${nestedKey}`) : [key]);
-    }, []);
+function delve(current: any, path: string) {
+  const parts = path.split('.');
+
+  for (let i = 0; i < parts.length; i++) {
+    current = current ? current[parts[i]] : undefined;
   }
 
-  return getKeys(obj);
+  return current;
 }
-
-const PERIODS_PATTERN = /\./g;
-
-function countPeriods(string: string): number {
-  return (string.match(PERIODS_PATTERN) || []).length;
-}
-
-function themeKeysOrder(a, b) {
-  return (b.length << countPeriods(b)) - (a.length << countPeriods(a));
-}
-
-type LooseTemplateStringsArray = string[] | TemplateStringsArray;
 
 export function useThemedStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   const theme = (useTheme() || {}) as {};
-  const themeKeys = deepKeys(theme).sort(themeKeysOrder);
-  let argsForUseStyle: [LooseTemplateStringsArray, ...any[]];
+  const themedStrings: string[] = [];
+  const themedInputs: any[] = [];
 
-  if (themeKeys.length) {
-    const themedStrings: string[] = [];
-    const themedInputs: any[] = [];
-    const themeInterpolationPattern = new RegExp(`\\$${themeKeys.join('|\\$')}`, 'g');
+  for (let i = 0, len = strings.length; i < len; i++) {
+    const currentString = strings[i];
+    let lastOffset = 0;
 
-    for (let i = 0, len = strings.length; i < len; i++) {
-      const currentString = strings[i];
-      let lastOffset = 0;
+    currentString.replace(THEMED_STYLE_VARIABLE_PATTERN, (match: string, offset: number) => {
+      const path = match.slice(1);
+      const value = delve(theme, path);
 
-      currentString.replace(themeInterpolationPattern, (match: string, offset: number) => {
-        themedStrings.push(currentString.slice(lastOffset, offset));
-        themedInputs.push(theme[match.slice(1)]);
-        lastOffset = offset + match.length;
-
-        return match;
-      });
-      themedStrings.push(currentString.slice(lastOffset, currentString.length));
-
-      const currentInput = inputs[i];
-
-      if (typeof currentInput === 'function') {
-        themedInputs.push(currentInput(theme));
-      } else if (currentInput != null) {
-        themedInputs.push(currentInput);
+      if (value == null) {
+        throw new Error(`Theme does not have a value at ${path}`);
       }
-    }
 
-    argsForUseStyle = [themedStrings, ...themedInputs];
-  } else {
-    argsForUseStyle = [strings, ...inputs];
+      themedStrings.push(currentString.slice(lastOffset, offset));
+      themedInputs.push(value);
+      lastOffset = offset + match.length;
+
+      return match;
+    });
+    themedStrings.push(currentString.slice(lastOffset, currentString.length));
+
+    const currentInput = inputs[i];
+
+    if (typeof currentInput === 'function') {
+      themedInputs.push(currentInput(theme));
+    } else if (currentInput != null) {
+      themedInputs.push(currentInput);
+    }
   }
 
-  return useStyle.apply(null, argsForUseStyle);
+  return useStyle.call(null, themedStrings, ...themedInputs);
 }
