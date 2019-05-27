@@ -285,8 +285,8 @@ The interpolation syntax allows you to access nested properties too. Imagine you
 ```js
 {
   colors: {
-    fg: '#000',
-    bg: '#fff'
+    fg: 'magenta',
+    bg: 'yellow'
   },
   space: [
     '0', '0.25rem', '0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem', '32rem'
