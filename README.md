@@ -292,21 +292,7 @@ function Paragraph({ ...props }) {
 
 To access a property of the theme you're providing, just place it between `#{` and `}` braces. The usual template string interpolation still works, so you're still able to create styles based on your component props.
 
-If you need to output different theme values based on your props, interpolate a function and it'll receive your theme as an argument:
-
-```js
-function Paragraph({ isInverted, ...props }) {
-  const cn = useThemedStyle`
-    padding: 1rem;
-    background-color: ${({ fg, bg }) => (isInverted ? fg : bg)};
-    color: ${({ fg, bg }) => (isInverted ? bg : fg)};
-  `;
-
-  return <p className={cn} {...props} />;
-}
-```
-
-The interpolation syntax even allows you to access nested properties in themes. Imagine your theme looked like this:
+The interpolation syntax allows you to access nested properties too. Imagine your theme looked like this:
 
 ```js
 {
@@ -332,6 +318,20 @@ function Paragraph({ ...props }) {
     @media (min-width: 480px) {
       padding: #{space.4};
     }
+  `;
+
+  return <p className={cn} {...props} />;
+}
+```
+
+If you need to output different theme values based on your props, interpolate a function and it'll receive your theme as an argument:
+
+```js
+function Paragraph({ isInverted, ...props }) {
+  const cn = useThemedStyle`
+    padding: 1rem;
+    background-color: ${({ fg, bg }) => (isInverted ? fg : bg)};
+    color: ${({ fg, bg }) => (isInverted ? bg : fg)};
   `;
 
   return <p className={cn} {...props} />;
