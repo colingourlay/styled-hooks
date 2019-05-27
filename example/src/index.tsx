@@ -10,11 +10,11 @@ interface TitleProps {
 
 function Title({ children }: TitleProps) {
   const className = useThemedStyle`
-    margin: $margin;
-    padding: 1rem 0;
+    margin: #{space.3} 0 #{space.0};
+    padding: ${({ space }) => `${space[3]} ${space[0]}`};
     width: 10rem;
-    background-color: $fg;
-    color: $bg;
+    background-color: #{colors.fg};
+    color: #{colors.bg};
 
     @media (min-width: 32rem) {
       width: 15rem;
@@ -30,7 +30,10 @@ interface ButtonProps {
 }
 
 function Button({ primary, children }: ButtonProps) {
-  const { bg, fg, marginRem } = useTheme();
+  const {
+    colors: { bg, fg },
+    marginRem
+  } = useTheme();
   const className = useStyle`
     display: inline-block;
     border-radius: 0.125rem;
@@ -76,10 +79,12 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [theme, setTheme] = useState({
-    bg: '#fff',
-    fg: '#000',
-    margin: '1rem',
-    marginRem: 1
+    colors: {
+      bg: '#fff',
+      fg: '#000'
+    },
+    space: ['0', '0.25rem', '0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem', '32rem'],
+    marginRem: 1 // for testing unit resolution
   });
 
   const className = useStyle`
@@ -88,7 +93,7 @@ function App() {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: ${theme.bg};
+    background: ${theme.colors.bg};
     box-sizing: border-box;
     min-height: 100vh;
   `;
@@ -98,8 +103,10 @@ function App() {
 
     setTheme(theme => ({
       ...theme,
-      bg: hsl2hex(pageX / window.innerWidth, 0.25, 0.9),
-      fg: hsl2hex(pageY / window.innerHeight, 0.5, 0.5)
+      colors: {
+        bg: hsl2hex(pageX / window.innerWidth, 0.25, 0.9),
+        fg: hsl2hex(pageY / window.innerHeight, 0.5, 0.5)
+      }
     }));
   }
 

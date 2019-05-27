@@ -10,6 +10,7 @@
 - [API](#api)
   - [`useStyle`](#usestyle)
   - [`useTheme`](#usetheme)
+  - [`useThemedStyle`](#usethemedstyle)
   - [`injectGlobal`](#injectglobal)
 - [About the project](#about-the-project)
 
@@ -252,6 +253,90 @@ ReactDOM.render(<App />, document.getElementById('root'));
 <p>
   <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
+
+### `useThemedStyle`
+
+Taking the `useStyle` and `useTheme` concepts and mixing them together, you end up with a pretty tasty cocktail. In the `useTheme` example above, you'd create a themed component like this:
+
+```js
+import { useStyle, useTheme } from 'styled-hooks';
+
+function Paragraph({ ...props }) {
+  const { fg, bg } = useTheme();
+
+  const cn = useStyle`
+    padding: 1rem;
+    background-color: ${bg};
+    color: ${fg};
+  `;
+
+  return <p className={cn} {...props} />;
+}
+```
+
+With the `useThemedStyle` hook—which uses a syntax familiar to anyone who's used SASS—everything simplifies further:
+
+```js
+import { useThemedStyle } from 'styled-hooks';
+
+function Paragraph({ ...props }) {
+  const cn = useThemedStyle`
+    padding: 1rem;
+    background-color: #{bg};
+    color: #{fg};
+  `;
+
+  return <p className={cn} {...props} />;
+}
+```
+
+To access a property of the theme you're providing, just place it between `#{` and `}` braces. The usual template string interpolation still works, so you're still able to create styles based on your component props.
+
+If you need to output different theme values based on your props, interpolate a function and it'll receive your theme as an argument:
+
+```js
+function Paragraph({ isInverted, ...props }) {
+  const cn = useThemedStyle`
+    padding: 1rem;
+    background-color: ${({ fg, bg }) => (isInverted ? fg : bg)};
+    color: ${({ fg, bg }) => (isInverted ? bg : fg)};
+  `;
+
+  return <p className={cn} {...props} />;
+}
+```
+
+The interpolation syntax even allows you to access nested properties in themes. Imagine your theme looked like this:
+
+```js
+{
+  colors: {
+    fg: '#000',
+    bg: '#fff'
+  },
+  space: [
+    '0', '0.25rem', '0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem', '32rem'
+  ]
+}
+```
+
+You're able to access it like this:
+
+```js
+function Paragraph({ ...props }) {
+  const cn = useThemedStyle`
+    padding: #{space.3};
+    background-color: #{colors.bg};
+    color: #{colors.fg};
+
+    @media (min-width: 480px) {
+      padding: #{space.4};
+    }
+  `;
+
+  return <p className={cn} {...props} />;
+}
+```
 
 ### `injectGlobal`
 
