@@ -386,3 +386,19 @@ injectGlobal`
 - If you'd like to help out, please submit ideas & bugs to the project's [issue tracker](https://github.com/colingourlay/styled-hooks/issues)
 - To contribute code and documentation, please see the [contribution guide](CONTRIBUTING.md)
 - All contributions and project activity are subject to the project's [code of conduct](CODE_OF_CONDUCT.md)
+
+### Credits
+
+Dependencies:
+
+- [stylis](https://stylis.js.org/) - The CSS parser providing auto-prefixing and SASS-like nesting
+
+Inspiration:
+
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [styled-components](https://www.styled-components.com/)
+- [styled-system](https://styled-system.com/)
+
+Thanks:
+
+- [Glen Maddern](https://glenmaddern.com/), for giving this project a name
