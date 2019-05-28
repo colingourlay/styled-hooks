@@ -8,10 +8,14 @@
 
 - [Getting started](#getting-started)
 - [API](#api)
-  - [`useStyle`](#usestyle)
-  - [`useTheme`](#usetheme)
-  - [`useThemedStyle`](#usethemedstyle)
-  - [`injectGlobal`](#injectglobal)
+  - Hooks
+    - [`useStyle`](#usestyle)
+    - [`useTheme`](#usetheme)
+    - [`useThemedStyle`](#usethemedstyle)
+  - Components
+    - [`ThemeProvider`](#themeprovider)
+  - Utilities
+    - [`injectGlobal`](#injectglobal)
 - [About the project](#about-the-project)
 
 ## Getting started
@@ -333,6 +337,33 @@ function Paragraph({ isInverted, ...props }) {
 <p style="text-align: right">
   <a href="https://codesandbox.io/s/styledhooksapiusethemedstyle3-rwujq"><img alt="Edit styled-hooks-api-usethemedstyle-3" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-3"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
+
+### ThemeProvider
+
+This component allows you to provides theme context that can be accessed by [`useTheme`](#usetheme) and [`useThemedStyle`](#usethemedstyle) hooks anywhere in your app. It has a single property, `theme` which should be set to an object. Have a look at their respective examples above for usage.
+
+```jsx
+import { ThemeProvider } from 'styled-hooks';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function App() {
+  /* useTheme() */
+  /* useThemedStyle`` */
+}
+
+const theme = {
+  fg: 'magenta',
+  bg: 'yellow'
+};
+
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>,
+  document.getElementById('root')
+);
+```
 
 ### `injectGlobal`
 
