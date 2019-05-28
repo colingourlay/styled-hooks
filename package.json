@@ -23,12 +23,6 @@
   "files": [
     "dist"
   ],
-  "git": {
-    "tagName": "${version}"
-  },
-  "github": {
-    "release": true
-  },
   "scripts": {
     "start": "concurrently -k \"npm:example:*\"",
     "example:serve": "http-server example --silent",
