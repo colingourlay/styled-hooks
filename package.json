@@ -27,6 +27,7 @@
     "start": "concurrently -k \"npm:example:*\"",
     "example:serve": "http-server example --silent",
     "example:watch": "microbundle watch --no-compress --entry example/src/index.tsx --external=@emotion/stylis=Stylis --globals react=React,react-dom=ReactDOM --format umd --jsx React.createElement --output example/dist/bundle.js",
+    "measure": "microbundle --entry example/src/measure.ts --external=@emotion/stylis=Stylis --format es --jsx React.createElement --output example/dist/measure.js --sourcemap=false && rimraf example/dist/measure.m.js",
     "clean": "rimraf dist",
     "watch": "npm run clean && microbundle watch --no-compress --format cjs,es",
     "build": "npm run clean && microbundle --format cjs,es --sourcemap=false",
