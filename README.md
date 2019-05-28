@@ -45,7 +45,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-getting-started"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksgettingstarted-2bmjr"><img alt="Edit styled-hooks-getting-started" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-getting-started"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 The rendered page will look like this:
@@ -167,7 +167,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusestyle-ujfzj"><img alt="Edit styled-hooks-api-usestyle" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 ### `useTheme`
@@ -200,7 +200,7 @@ ReactDOM.render(
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusetheme1-uett8"><img alt="Edit styled-hooks-api-usetheme-1" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 Combine this with React's `useState` hook, and you'll be able to modify the theme on the fly:
@@ -251,7 +251,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusetheme2-pk1s9"><img alt="Edit styled-hooks-api-usetheme-2" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 ### `useThemedStyle`
@@ -275,7 +275,7 @@ function Paragraph({ ...props }) {
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusethemedstyle1-dcwmb"><img alt="Edit styled-hooks-api-usethemedstyle-1" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 To access a property of the theme you're providing, just place it between `#{` and `}` braces. The usual template string interpolation still works, so you're still able to create styles based on your component props.
@@ -313,7 +313,7 @@ function Paragraph({ ...props }) {
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusethemedstyle2-30yyj"><img alt="Edit styled-hooks-api-usethemedstyle-2" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 If you need to output different theme values based on your props, interpolate a function and it'll receive your theme as an argument:
@@ -331,7 +331,7 @@ function Paragraph({ isInverted, ...props }) {
 ```
 
 <p>
-  <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-3"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusethemedstyle3-rwujq"><img alt="Edit styled-hooks-api-usethemedstyle-3" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-3"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 ### `injectGlobal`
