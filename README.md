@@ -118,6 +118,8 @@ If you want to use this output in _all_ browsers, use the `useStyleWithoutCustom
 
 On the other hand, if you can guarantee your app wont be run in older browsers, you can skip the support check by using the `useStyleWithCustomProps` hook directly.
 
+Note: You can still interpolate large portions of your CSS as strings—Custom Properties only come into effect when you attempt to interpolate property _values_.
+
 </details>
 
 ## API
@@ -377,7 +379,7 @@ injectGlobal`
 `;
 ```
 
-...will add the CSS you write to the document. You can use any interpolated values you want, but unlike hooks they won't become CSS Custom Properties.
+...will add the CSS you write to the document. You can use any interpolated values you want, but unlike hooks they won't ever become CSS Custom Properties.
 
 ## About the project
 

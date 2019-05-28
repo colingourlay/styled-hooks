@@ -17,6 +17,8 @@ export function generateCSS(className: string | null, strings: TemplateStringsAr
   return stylis(className ? `.${className}` : '', input);
 }
 
+const DELIMITER_PATTERN = /:|;/;
+
 export function generateCSSWithCustomProps(
   sharedClassName: string,
   variableClassName: string,
@@ -31,6 +33,12 @@ export function generateCSSWithCustomProps(
     sharedInput += strings[i];
 
     if (values[i] != null) {
+      // Try to not create custom properties where they'd be syntactically incorrect
+      if (String(values[i]).match(DELIMITER_PATTERN) || sharedInput.lastIndexOf(':') < sharedInput.lastIndexOf(';')) {
+        sharedInput += values[i];
+        continue;
+      }
+
       const customPropKey = `--${sharedClassName}-${nextCustomPropIndex++}`;
 
       sharedInput += `var(${customPropKey})`;

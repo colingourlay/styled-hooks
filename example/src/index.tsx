@@ -65,12 +65,14 @@ interface EmojiProps {
 }
 
 function Emoji({ visible, children }: EmojiProps) {
+  /* Only opacity should create a custom prop */
   const className = useStyle`
     opacity: ${visible ? 1 : 0};
-    margin: 1rem;
-    font-size: 5rem;
-    transition: opacity .125s;
-  `;
+    ${'padding: 1rem;'}
+    margin: ${`1rem;
+    font-size: `}5rem;
+    ${'transition'}: opacity .125s;
+    ${''}`;
 
   return <div className={className}>{children}</div>;
 }
