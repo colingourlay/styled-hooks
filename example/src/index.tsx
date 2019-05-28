@@ -32,13 +32,13 @@ interface ButtonProps {
 function Button({ primary, children }: ButtonProps) {
   const {
     colors: { bg, fg },
-    marginRem
+    space
   } = useTheme();
   const className = useStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
-    margin: ${marginRem}rem;
+    margin: ${space[3]};
     width: 10rem;
     background-color: ${primary ? fg : 'transparent'};
     color: ${primary ? bg : fg};
@@ -83,8 +83,7 @@ function App() {
       bg: '#fff',
       fg: '#000'
     },
-    space: ['0', '0.25rem', '0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem', '32rem'],
-    marginRem: 1 // for testing unit resolution
+    space: ['0', '0.25rem', '0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem', '32rem']
   });
 
   const className = useStyle`
