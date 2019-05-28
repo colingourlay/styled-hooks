@@ -1,5 +1,5 @@
-import Stylis from '@emotion/stylis';
-import _insertRulePlugin from 'stylis-rule-sheet';
+// import Stylis from '@emotion/stylis';
+// import _insertRulePlugin from 'stylis-rule-sheet';
 
 function sheetForTag(tag: HTMLStyleElement): CSSStyleSheet {
   if (!tag.sheet) {

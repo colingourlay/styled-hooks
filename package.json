@@ -51,7 +51,6 @@
     "react": "^16.8.4"
   },
   "dependencies": {
-    "@emotion/stylis": "^0.8.3",
-    "stylis-rule-sheet": "0.0.10"
+    "@emotion/stylis": "^0.8.3"
   }
 }
