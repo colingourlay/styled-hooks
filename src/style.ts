@@ -43,14 +43,22 @@ export function useStyleWithCustomProps(strings: TemplateStringsArray, ...inputs
   return `${sharedClassName} ${variableClassName}`;
 }
 
-export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
+export function useStyleBase(strings: TemplateStringsArray, ...inputs: any[]): string {
   return (inputs.length > 0 && IS_BROWSER_ENVIRONMENT_THAT_SUPPORTS_CSS_CUSTOM_PROPERTIES
     ? useStyleWithCustomProps
     : useStyleWithoutCustomProps)(strings, ...inputs);
 }
 
+export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
+  if (inputs.find(input => typeof input === 'function')) {
+    throw new Error('Functions are unacceptable useStyle inputs as no theme is made available');
+  }
+
+  return useStyleBase.call(null, strings, ...inputs);
+}
+
 export function useThemedStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   const [themedStrings, themedInputs] = useThemedStringsAndInputs(strings, inputs);
 
-  return useStyle.call(null, themedStrings, ...themedInputs);
+  return useStyleBase.call(null, themedStrings, ...themedInputs);
 }
