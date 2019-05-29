@@ -118,14 +118,16 @@ function App() {
   }, [activeIndex]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
-        <Title>Styled Hooks</Title>
-        <Button primary={activeIndex === 0}>First</Button>
-        <Button primary={activeIndex === 1}>Second</Button>
-        <Button primary={activeIndex === 2}>Third</Button>
-        <Emoji visible={activeIndex === 3}>🎉</Emoji>
-      </div>
+    <ThemeProvider theme={{ space: theme.space }}>
+      <ThemeProvider theme={{ colors: theme.colors }}>
+        <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
+          <Title>Styled Hooks</Title>
+          <Button primary={activeIndex === 0}>First</Button>
+          <Button primary={activeIndex === 1}>Second</Button>
+          <Button primary={activeIndex === 2}>Third</Button>
+          <Emoji visible={activeIndex === 3}>🎉</Emoji>
+        </div>
+      </ThemeProvider>
     </ThemeProvider>
   );
 }

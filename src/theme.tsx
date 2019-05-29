@@ -1,38 +1,24 @@
 import React, { createContext, useContext } from 'react';
 
-export const ThemeContext = createContext({});
-
 interface Theme {
   [propName: string]: any;
 }
 
-function useMergedTheme(theme: Theme | ((outerTheme?: Theme) => Theme), outerTheme?: Theme): Theme {
-  if (typeof theme === 'function') {
-    return theme(outerTheme);
-  }
-
-  return outerTheme ? { ...outerTheme, ...theme } : theme;
-}
-
 interface ThemeProviderProps {
   children?: any[];
-  theme: Theme | ((outerTheme: Theme) => void);
+  theme: Theme;
 }
 
-export function ThemeProvider({ children, theme }: ThemeProviderProps) {
-  if (!children) {
-    return null;
-  }
-
-  const themeContext = useMergedTheme(theme, useContext(ThemeContext));
-
-  return <ThemeContext.Provider value={themeContext}>{React.Children.only(children)}</ThemeContext.Provider>;
-}
-
-export const ThemeConsumer = ThemeContext.Consumer;
+const ThemeContext = createContext({});
 
 export function useTheme() {
   return useContext(ThemeContext);
+}
+
+export function ThemeProvider({ children, theme }: ThemeProviderProps) {
+  const mergedTheme = { ...useTheme(), ...theme };
+
+  return <ThemeContext.Provider value={mergedTheme}>{React.Children.only(children)}</ThemeContext.Provider>;
 }
 
 const INTERPOLATED_THEME_PROP_PATH_PATTERN = /#{[\w_\.]+}/g;
