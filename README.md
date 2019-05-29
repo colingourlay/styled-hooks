@@ -114,11 +114,7 @@ Don't worry! Styled Hooks will render the following in browsers that aren't up t
 
 The amount of CSS generated is larger, but it acheives the same effect.
 
-If you want to use this output in _all_ browsers, use the `useStyleWithoutCustomProps` hook.
-
-On the other hand, if you can guarantee your app wont be run in older browsers, you can skip the support check by using the `useStyleWithCustomProps` hook directly.
-
-Note: You can still interpolate large portions of your CSS as strings—Custom Properties only come into effect when you attempt to interpolate property _values_.
+Note: You can still interpolate large portions of your CSS as strings—Custom Properties only come into effect when you attempt to interpolate CSS property _values_.
 
 </details>
 
