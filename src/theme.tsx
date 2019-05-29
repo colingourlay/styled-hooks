@@ -4,19 +4,22 @@ interface Theme {
   [propName: string]: any;
 }
 
+type ThemeMergeFn = (outerTheme: Theme) => Theme;
+
 interface ThemeProviderProps {
   children?: any[];
-  theme: Theme;
+  theme: Theme | ThemeMergeFn;
 }
 
 const ThemeContext = createContext({});
 
-export function useTheme() {
+export function useTheme(): Theme {
   return useContext(ThemeContext);
 }
 
 export function ThemeProvider({ children, theme }: ThemeProviderProps) {
-  const mergedTheme = { ...useTheme(), ...theme };
+  const outerTheme = useTheme();
+  const mergedTheme = typeof theme === 'function' ? theme(outerTheme) : { ...outerTheme, ...theme };
 
   return <ThemeContext.Provider value={mergedTheme}>{React.Children.only(children)}</ThemeContext.Provider>;
 }

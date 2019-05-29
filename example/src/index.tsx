@@ -13,8 +13,8 @@ function Title({ children }: TitleProps) {
     margin: #{space.3} 0 #{space.0};
     padding: ${({ space }) => `${space[3]} ${space[0]}`};
     width: 10rem;
-    background-color: #{colors.fg};
-    color: #{colors.bg};
+    background-color: #{colors.bg};
+    color: #{colors.fg};
 
     @media (min-width: 32rem) {
       width: 15rem;
@@ -118,16 +118,16 @@ function App() {
   }, [activeIndex]);
 
   return (
-    <ThemeProvider theme={{ space: theme.space }}>
-      <ThemeProvider theme={{ colors: theme.colors }}>
-        <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
+    <ThemeProvider theme={theme}>
+      <div className={className} onMouseMove={updateColors} onTouchMove={updateColors}>
+        <ThemeProvider theme={outerTheme => ({ ...outerTheme, colors: { bg: theme.colors.fg, fg: theme.colors.bg } })}>
           <Title>Styled Hooks</Title>
-          <Button primary={activeIndex === 0}>First</Button>
-          <Button primary={activeIndex === 1}>Second</Button>
-          <Button primary={activeIndex === 2}>Third</Button>
-          <Emoji visible={activeIndex === 3}>🎉</Emoji>
-        </div>
-      </ThemeProvider>
+        </ThemeProvider>
+        <Button primary={activeIndex === 0}>First</Button>
+        <Button primary={activeIndex === 1}>Second</Button>
+        <Button primary={activeIndex === 2}>Third</Button>
+        <Emoji visible={activeIndex === 3}>🎉</Emoji>
+      </div>
     </ThemeProvider>
   );
 }
