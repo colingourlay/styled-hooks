@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo } from 'react';
 import { generateClassName } from './class-name';
 import { generateCSS, generateCSSWithCustomProps } from './css';
 import { subscribe, unsubscribe } from './style-manager';
-import { useTheme } from './theme';
+import { useThemedStringsAndInputs } from './theme';
 
 interface GlobalCSS {
   supports: Function;
@@ -46,54 +46,11 @@ export function useStyleWithCustomProps(strings: TemplateStringsArray, ...inputs
 export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   return (inputs.length > 0 && IS_BROWSER_ENVIRONMENT_THAT_SUPPORTS_CSS_CUSTOM_PROPERTIES
     ? useStyleWithCustomProps
-    : useStyleWithoutCustomProps)(strings as TemplateStringsArray, ...inputs);
-}
-
-const THEMED_STYLE_VARIABLE_PATTERN = /#{[\w_\.]+}/g;
-
-function delve(current: any, path: string) {
-  const parts = path.split('.');
-
-  for (let i = 0; i < parts.length; i++) {
-    current = current ? current[parts[i]] : undefined;
-  }
-
-  return current;
+    : useStyleWithoutCustomProps)(strings, ...inputs);
 }
 
 export function useThemedStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
-  const theme = (useTheme() || {}) as {};
-  const themedStrings: string[] = [];
-  const themedInputs: any[] = [];
-
-  for (let i = 0, len = strings.length; i < len; i++) {
-    const currentString = strings[i];
-    let lastOffset = 0;
-
-    currentString.replace(THEMED_STYLE_VARIABLE_PATTERN, (match: string, offset: number) => {
-      const path = match.slice(2, -1).trim();
-      const value = delve(theme, path);
-
-      if (typeof value !== 'string' && typeof value !== 'number') {
-        throw new Error(`Theme does not have a valid value at: ${path}`);
-      }
-
-      themedStrings.push(currentString.slice(lastOffset, offset));
-      themedInputs.push(value);
-      lastOffset = offset + match.length;
-
-      return match;
-    });
-    themedStrings.push(currentString.slice(lastOffset, currentString.length));
-
-    const currentInput = inputs[i];
-
-    if (typeof currentInput === 'function') {
-      themedInputs.push(currentInput(theme));
-    } else if (currentInput != null) {
-      themedInputs.push(currentInput);
-    }
-  }
+  const [themedStrings, themedInputs] = useThemedStringsAndInputs(strings, inputs);
 
   return useStyle.call(null, themedStrings, ...themedInputs);
 }
