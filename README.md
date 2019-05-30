@@ -453,7 +453,7 @@ injectGlobal`
 `;
 ```
 
-It cant't be part of your app's component hierarchy, and therefore doesn't have access to theme context. You can use any interpolated values you want, but unlike hooks they won't ever become CSS Custom Properties.
+It can't be part of your app's component hierarchy, and therefore doesn't have access to theme context. You can use any interpolated values you want, but unlike hooks they won't ever become CSS Custom Properties.
 
 ## About the project
 
