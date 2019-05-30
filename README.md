@@ -330,11 +330,13 @@ import { ThemeProvider, useTheme } from 'styled-hooks';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-function ColorSwapper() {
+function ColorSwapper({ ...props }) {
   const { fg, bg } = useTheme();
 
   return (
-    <button>{`This app's foreground color is ${fg}; its background color is ${bg}`}</button>
+    <button {...props}>
+      {`This app's foreground color is ${fg}; its background color is ${bg}`}
+    </button>
   );
 }
 
