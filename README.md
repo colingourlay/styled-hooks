@@ -1,4 +1,4 @@
-<h1><div align="center"><img title="Styled Hooks" alt="Styled Hooks" src="https://raw.githubusercontent.com/colingourlay/styled-hooks/master/static/logo.svg?sanitize=true" /></div></h1>
+<h1><div align="center"><picture><source srcset="https://raw.githubusercontent.com/colingourlay/styled-hooks/master/static/logo-inline.svg?sanitize=true" media="(min-width: 640px)" /><img title="Styled Hooks" alt="Styled Hooks" src="https://raw.githubusercontent.com/colingourlay/styled-hooks/master/static/logo.svg?sanitize=true" /></picture></div></h1>
 <p align="center">Style your React components with Hooks</p>
 <p align="center">
   <a href="https://www.npmjs.com/package/styled-hooks"><img alt="NPM latest published version" src="https://img.shields.io/npm/v/styled-hooks.svg?style=flat-square&color=f0f"></a> <img alt="Formats: CommonJS, ECMAScript Modules" src="https://img.shields.io/badge/formats-cjs%2C%20esm-f0f.svg?style=flat-square">
