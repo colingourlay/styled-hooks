@@ -369,7 +369,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ---
 
-### ThemeProvider
+### `ThemeProvider`
 
 This component allows you to provide theme context that can be accessed by [`useStyle`](#usestyle) and [`useTheme`](#usetheme) hooks anywhere in your app. Have a look at their respective examples above for basic usage.
 
