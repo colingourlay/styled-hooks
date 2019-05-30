@@ -1,7 +1,7 @@
 declare var React;
 declare var ReactDOM;
 const { useEffect, useState } = React;
-import { ThemeProvider, injectGlobal, useStyle, useTheme, useThemedStyle } from '../../src/styled-hooks';
+import { ThemeProvider, injectGlobal, useStyle, useTheme, useThemelessStyle } from '../../src/styled-hooks';
 import { hsl2hex } from './color';
 
 interface TitleProps {
@@ -9,7 +9,7 @@ interface TitleProps {
 }
 
 function Title({ children }: TitleProps) {
-  const className = useThemedStyle`
+  const className = useStyle`
     margin: #{space.3} 0 #{space.0};
     padding: ${({ space }) => `${space[3]} ${space[0]}`};
     width: 10rem;
@@ -34,7 +34,7 @@ function Button({ primary, children }: ButtonProps) {
     colors: { bg, fg },
     space
   } = useTheme();
-  const className = useStyle`
+  const className = useThemelessStyle`
     display: inline-block;
     border-radius: 0.125rem;
     padding: 0.5rem 0;
@@ -88,7 +88,7 @@ function App() {
     space: ['0', '0.25rem', '0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem', '32rem']
   });
 
-  const className = useStyle`
+  const className = useThemelessStyle`
     display: flex;
     flex-direction: column;
     justify-content: center;

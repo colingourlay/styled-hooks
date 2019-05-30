@@ -11,7 +11,6 @@
   - Hooks
     - [`useStyle`](#usestyle)
     - [`useTheme`](#usetheme)
-    - [`useThemedStyle`](#usethemedstyle)
   - Components
     - [`ThemeProvider`](#themeprovider)
   - Utilities
@@ -124,7 +123,7 @@ Note: You can still interpolate large portions of your CSS as strings—Custom P
 
 The `useStyle` hook is a [tagged template](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that expects CSS & dynamic values, and returns a `className` you can use in your component.
 
-The hook will memoise the CSS each unique style variant, and inject it into your document's `<head>`, taking advantage of CSS Custom Properties (if your browser suports them) to reduce style replication.
+The hook will memoise the CSS of each unique style variant, and inject it into your document's `<head>`, taking advantage of CSS Custom Properties (if your browser suports them) to reduce style replication.
 
 Style injection happens during the browser's layout phase, so your components will always be painted fully-styled.
 
@@ -174,22 +173,22 @@ ReactDOM.render(
 
 ---
 
-### `useTheme`
+#### Theming
 
-The `useTheme` hook allows you to read the theme context from the nearest `<ThemeProvider />` ancestor:
+In the example above, the dynamic styling is based on component properties, but what if we wanted to have a consistent theme throughout our app? Assuming your component is descendant of a [`ThemeProvider`](#themeprovider) component, you're able to take advantage of a couple of the `useStyle` hook's additional features...
 
-```jsx
-import { useStyle, useTheme, ThemeProvider } from 'styled-hooks';
+The first is an interpolation syntax familiar to anyone who's used SASS:
+
+```js
+import { ThemeProvider, useStyle } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 function Paragraph({ ...props }) {
-  const { fg, bg } = useTheme();
-
   const cn = useStyle`
     padding: 1rem;
-    background-color: ${bg};
-    color: ${fg};
+    background-color: #{bg};
+    color: #{fg};
   `;
 
   return <p className={cn} {...props} />;
@@ -204,84 +203,7 @@ ReactDOM.render(
 ```
 
 <p style="text-align: right">
-  <a href="https://codesandbox.io/s/styledhooksapiusetheme1-uett8"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
-</p>
-
-Combine this with React's `useState` hook, and you'll be able to modify the theme on the fly:
-
-```jsx
-import { useStyle, useTheme, ThemeProvider } from 'styled-hooks';
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-
-function Button({ primary, ...props }) {
-  const { fg, bg } = useTheme();
-
-  const cn = useStyle`
-    padding: 0.5rem;
-    background-color: ${primary ? fg : bg};
-    color: ${primary ? bg : fg};
-    border: 0.125rem solid ${fg};
-  `;
-
-  return <button className={cn} {...props} />;
-}
-
-function App() {
-  const [theme, setTheme] = useState({
-    fg: 'magenta',
-    bg: 'yellow'
-  });
-
-  const invertTheme = () =>
-    setTheme({
-      bg: theme.fg,
-      fg: theme.bg
-    });
-
-  return (
-    <ThemeProvider theme={theme}>
-      <div>
-        <Button onClick={invertTheme}>Invert Theme</Button>
-        <Button onClick={invertTheme} primary>
-          Invert Theme
-        </Button>
-      </div>
-    </ThemeProvider>
-  );
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
-```
-
-<p style="text-align: right">
-  <a href="https://codesandbox.io/s/styledhooksapiusetheme2-pk1s9"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
-</p>
-
----
-
-### `useThemedStyle`
-
-In the examples above, creating a themed component requires you to use two hooks: `useTheme` & `useStyle`.
-
-The `useThemedStyle` hook—which uses a syntax familiar to anyone who's used SASS—mixes both of those ingredients into a tasty cocktail:
-
-```js
-import { useThemedStyle } from 'styled-hooks';
-
-function Paragraph({ ...props }) {
-  const cn = useThemedStyle`
-    padding: 1rem;
-    background-color: #{bg};
-    color: #{fg};
-  `;
-
-  return <p className={cn} {...props} />;
-}
-```
-
-<p style="text-align: right">
-  <a href="https://codesandbox.io/s/styledhooksapiusethemedstyle1-dcwmb"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusestyletheming1-dcwmb"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle-theming-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 To access a property of the theme you're providing, just place it between `#{` and `}` braces. The usual template string interpolation still works, so you're still able to create styles based on your component props.
@@ -304,7 +226,7 @@ You're able to access it like this:
 
 ```js
 function Paragraph({ ...props }) {
-  const cn = useThemedStyle`
+  const cn = useStyle`
     padding: #{space.3};
     background-color: #{colors.bg};
     color: #{colors.fg};
@@ -319,14 +241,14 @@ function Paragraph({ ...props }) {
 ```
 
 <p style="text-align: right">
-  <a href="https://codesandbox.io/s/styledhooksapiusethemedstyle2-30yyj"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusestyletheming2-30yyj"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle-theming-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 If you need to output different theme values based on your props, interpolate a function and it'll receive your theme as an argument:
 
 ```js
 function Paragraph({ isInverted, ...props }) {
-  const cn = useThemedStyle`
+  const cn = useStyle`
     padding: 1rem;
     background-color: ${({ fg, bg }) => (isInverted ? fg : bg)};
     color: ${({ fg, bg }) => (isInverted ? bg : fg)};
@@ -337,16 +259,119 @@ function Paragraph({ isInverted, ...props }) {
 ```
 
 <p style="text-align: right">
-  <a href="https://codesandbox.io/s/styledhooksapiusethemedstyle3-rwujq"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemedstyle-3"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+  <a href="https://codesandbox.io/s/styledhooksapiusestyletheming3-rwujq"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usestyle-theming-3"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+</p>
+
+#### Going themeless
+
+If you're styling components that don't require theming, you can opt to use an alternative hook: `useThemelessStyle`. It works the same way you'd expect `useStyle` to, only you can't interpolate functions (as there's no theme to pass in), or use the `#{}`-style theme prop interpolation.
+
+```js
+import { useThemelessStyle } from 'styled-hooks';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function Title({ fontFamily, ...props }) {
+  const cn = useThemelessStyle`
+    font-family: ${fontFamily};
+    font-weight: 200;
+  `;
+
+  return <h1 className={cn} {...props} />;
+}
+
+ReactDOM.render(
+  <Title fontFamily="sans-serif">
+    I'm a sans-serif level-1 heading with a thin font-weight
+  </Title>,
+  document.getElementById('root')
+);
+```
+
+<p style="text-align: right">
+  <a href="https://codesandbox.io/s/styledhooksapiusethemelessstyle-ezpq5"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usethemelessstyle"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+</p>
+
+---
+
+### `useTheme`
+
+The `useTheme` hook allows you to read theme context from the nearest `<ThemeProvider />` ancestor, for use in places other than your styles:
+
+```jsx
+import { ThemeProvider, useTheme } from 'styled-hooks';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function Colors() {
+  const { fg, bg } = useTheme();
+
+  return (
+    <p>{`This app's foreground color is ${fg}; its background color is ${bg}`}</p>
+  );
+}
+
+ReactDOM.render(
+  <ThemeProvider theme={{ fg: 'magenta', bg: 'yellow' }}>
+    <Colors />
+  </ThemeProvider>,
+  document.getElementById('root')
+);
+```
+
+<p style="text-align: right">
+  <a href="https://codesandbox.io/s/styledhooksapiusetheme1-uett8"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-1"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
+</p>
+
+Combine this with React's `useState` hook, and you'll be able to modify the theme on the fly:
+
+```jsx
+import { ThemeProvider, useTheme } from 'styled-hooks';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+
+function ColorSwapper() {
+  const { fg, bg } = useTheme();
+
+  return (
+    <button>{`This app's foreground color is ${fg}; its background color is ${bg}`}</button>
+  );
+}
+
+function App() {
+  const [theme, setTheme] = useState({
+    fg: 'magenta',
+    bg: 'yellow'
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <ColorSwapper
+        onClick={() =>
+          setTheme({
+            bg: theme.fg,
+            fg: theme.bg
+          })
+        }
+      />
+    </ThemeProvider>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+<p style="text-align: right">
+  <a href="https://codesandbox.io/s/styledhooksapiusetheme2-pk1s9"><img alt="Edit the previous code example on CodeSandbox" src="https://codesandbox.io/static/img/play-codesandbox.svg" height="33"></a> <a href="https://glitch.com/edit/#!/remix/styled-hooks-api-usetheme-2"><img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="Remix the previous code example on Glitch" height="33"></a>
 </p>
 
 ---
 
 ### ThemeProvider
 
-This component allows you to provide theme context that can be accessed by [`useTheme`](#usetheme) and [`useThemedStyle`](#usethemedstyle) hooks anywhere in your app. Have a look at their respective examples above for basic usage.
+This component allows you to provide theme context that can be accessed by [`useStyle`](#usestyle) and [`useTheme`](#usetheme) hooks anywhere in your app. Have a look at their respective examples above for basic usage.
 
-`ThemeProvider`s have a single property, `theme` which can be set to either object or a merge function (explained further below).
+`ThemeProvider`s have a single property, `theme` which can be set to either an object or a merge function (explained further below).
 
 ```jsx
 import { ThemeProvider } from 'styled-hooks';
@@ -374,11 +399,11 @@ When you nest `ThemeProvider` components, the child theme will be merged with it
 Here's the `App.js` component that is imported into the previous example:
 
 ```jsx
-import { ThemeProvider, useThemedStyle } from 'styled-hooks';
+import { ThemeProvider, useStyle } from 'styled-hooks';
 import React from 'react';
 
 function Paragraph({ ...props }) {
-  const cn = useThemedStyle`
+  const cn = useStyle`
     padding: 1rem;
     background-color: #{bg};
     color: #{fg};
@@ -410,17 +435,23 @@ export default function App() {
 
 ### `injectGlobal`
 
-This works as you'd expect it to:
+This utility allows you to add arbitrary CSS to the document. It's useful for resets and other document-level styles.
 
 ```js
+import { injectGlobal } from 'styled-hooks';
+
 injectGlobal`
+  html {
+    font-size: 18px;
+  }
+
   body {
     margin: 0;
   }
 `;
 ```
 
-...will add the CSS you write to the document. You can use any interpolated values you want, but unlike hooks they won't ever become CSS Custom Properties.
+It cant't be part of your app's component hierarchy, and therefore doesn't have access to theme context. You can use any interpolated values you want, but unlike hooks they won't ever become CSS Custom Properties.
 
 ## About the project
 

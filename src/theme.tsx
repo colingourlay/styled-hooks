@@ -24,7 +24,7 @@ export function ThemeProvider({ children, theme }: ThemeProviderProps) {
   return <ThemeContext.Provider value={mergedTheme}>{React.Children.only(children)}</ThemeContext.Provider>;
 }
 
-const INTERPOLATED_THEME_PROP_PATH_PATTERN = /#{[\w_\.]+}/g;
+export const INTERPOLATED_THEME_PROP_PATH_PATTERN = /#{[\w_\.]+}/g;
 
 function delve(current: any, path: string) {
   const parts = path.split('.');

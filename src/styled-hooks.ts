@@ -1,14 +1,14 @@
-import { injectGlobal } from './global';
-import { useStyle, useThemedStyle } from './style';
+import { useStyle, useThemelessStyle } from './style';
 import { ThemeProvider, useTheme } from './theme';
+import { injectGlobal } from './utils';
 
 export {
-  // global
-  injectGlobal,
-  // style
+  // Hooks
   useStyle,
-  useThemedStyle,
-  // theme
+  useTheme,
+  useThemelessStyle,
+  // Components
   ThemeProvider,
-  useTheme
+  // Utilities
+  injectGlobal
 };

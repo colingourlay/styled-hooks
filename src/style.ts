@@ -1,8 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo } from 'react';
-import { generateClassName } from './class-name';
 import { generateCSS, generateCSSWithCustomProps } from './css';
+import { generateClassName } from './naming';
 import { subscribe, unsubscribe } from './style-manager';
-import { useThemedStringsAndInputs } from './theme';
+import { INTERPOLATED_THEME_PROP_PATH_PATTERN, useThemedStringsAndInputs } from './theme';
 
 interface GlobalCSS {
   supports: Function;
@@ -49,15 +49,21 @@ export function useStyleBase(strings: TemplateStringsArray, ...inputs: any[]): s
     : useStyleWithoutCustomProps)(strings, ...inputs);
 }
 
-export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
+export function useThemelessStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   if (inputs.find(input => typeof input === 'function')) {
-    throw new Error('Functions are unacceptable useStyle inputs as no theme is made available');
+    throw new Error('Functions are unacceptable useThemelessStyle inputs as no theme context is available');
+  }
+
+  if (strings.find(string => string.match(INTERPOLATED_THEME_PROP_PATH_PATTERN) !== null)) {
+    throw new Error(
+      'Interpolated theme props are unacceptable useThemelessStyle content as no theme context is available'
+    );
   }
 
   return useStyleBase.call(null, strings, ...inputs);
 }
 
-export function useThemedStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
+export function useStyle(strings: TemplateStringsArray, ...inputs: any[]): string {
   const [themedStrings, themedInputs] = useThemedStringsAndInputs(strings, inputs);
 
   return useStyleBase.call(null, themedStrings, ...themedInputs);
