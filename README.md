@@ -24,9 +24,9 @@ npm install styled-hooks
 ```
 
 ```jsx
-import { useStyle } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useStyle } from 'styled-hooks';
 
 function Paragraph({ color, ...props }) {
   const cn = useStyle`
@@ -130,9 +130,9 @@ Style injection happens during the browser's layout phase, so your components wi
 Thanks to [`stylis`](https://github.com/thysultan/stylis.js), you can use some basic nesting and media queries:
 
 ```jsx
-import { useStyle } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useStyle } from 'styled-hooks';
 
 function Button({ primary, ...props }) {
   const cn = useStyle`
@@ -180,9 +180,9 @@ In the example above, the dynamic styling is based on component properties, but 
 The first is an interpolation syntax familiar to anyone who's used SASS:
 
 ```js
-import { ThemeProvider, useStyle } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider, useStyle } from 'styled-hooks';
 
 function Paragraph({ ...props }) {
   const cn = useStyle`
@@ -267,9 +267,9 @@ function Paragraph({ isInverted, ...props }) {
 If you're styling components that don't require theming, you can opt to use an alternative hook: `useThemelessStyle`. It works the same way you'd expect `useStyle` to, only you can't interpolate functions (as there's no theme to pass in), or use the `#{}`-style theme prop interpolation.
 
 ```js
-import { useThemelessStyle } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useThemelessStyle } from 'styled-hooks';
 
 function Title({ fontFamily, ...props }) {
   const cn = useThemelessStyle`
@@ -299,9 +299,9 @@ ReactDOM.render(
 The `useTheme` hook allows you to read theme context from the nearest `<ThemeProvider />` ancestor, for use in places other than your styles:
 
 ```jsx
-import { ThemeProvider, useTheme } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider, useTheme } from 'styled-hooks';
 
 function Colors() {
   const { fg, bg } = useTheme();
@@ -326,9 +326,9 @@ ReactDOM.render(
 Combine this with React's `useState` hook, and you'll be able to modify the theme on the fly:
 
 ```jsx
-import { ThemeProvider, useTheme } from 'styled-hooks';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider, useTheme } from 'styled-hooks';
 
 function ColorSwapper({ ...props }) {
   const { fg, bg } = useTheme();
@@ -376,9 +376,9 @@ This component allows you to provide theme context that can be accessed by [`use
 `ThemeProvider`s have a single property, `theme` which can be set to either an object or a merge function (explained further below).
 
 ```jsx
-import { ThemeProvider } from 'styled-hooks';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from 'styled-hooks';
 import App from './App';
 
 const theme = {
@@ -401,8 +401,8 @@ When you nest `ThemeProvider` components, the child theme will be merged with it
 Here's the `App.js` component that is imported into the previous example:
 
 ```jsx
-import { ThemeProvider, useStyle } from 'styled-hooks';
 import React from 'react';
+import { ThemeProvider, useStyle } from 'styled-hooks';
 
 function Paragraph({ ...props }) {
   const cn = useStyle`
