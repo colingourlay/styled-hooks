@@ -40,8 +40,8 @@ function Paragraph({ color, ...props }) {
 
 ReactDOM.render(
   <div>
-    <Paragraph color="magenta">I'm magenta</Paragraph>
     <Paragraph color="blue">I'm blue</Paragraph>
+    <Paragraph color="magenta">I'm magenta</Paragraph>
   </div>,
   document.getElementById('root')
 );
@@ -56,27 +56,27 @@ The rendered page will look like this:
 ```html
 <!-- In <head /> -->
 <style>
-  .gtXozB {
+  .kuyydJ {
     padding: 1rem;
     background-color: yellow;
-    color: var(--gtXozB-0);
+    color: var(--kuyydJ-0);
   }
 </style>
 <style>
-  .gqAIHm {
-    --gtXozB-0: blue;
+  .fzSSnP {
+    --kuyydJ-0: blue;
   }
 </style>
 <style>
-  .eKigJM {
-    --gtxozb-0: magenta;
+  .hXjsLE {
+    --kuyydJ-0: magenta;
   }
 </style>
 
 <!-- In <div id="root" /> -->
 <div>
-  <p class="gtXozB gqAIHm">I'm blue</p>
-  <p class="gtXozB eKigJM">I'm magenta</p>
+  <p class="kuyydJ fzSSnP">I'm blue</p>
+  <p class="kuyydJ hXjsLE">I'm magenta</p>
 </div>
 ```
 
@@ -90,14 +90,14 @@ Don't worry! Styled Hooks will render the following in browsers that aren't up t
 ```html
 <!-- In <head /> -->
 <style>
-  .efNhRD {
+  .jODart {
     padding: 1rem;
     background-color: yellow;
     color: blue;
   }
 </style>
 <style>
-  .kGJulO {
+  .iDgeTy {
     padding: 1rem;
     background-color: yellow;
     color: magenta;
@@ -106,8 +106,8 @@ Don't worry! Styled Hooks will render the following in browsers that aren't up t
 
 <!-- In <div id="root" /> -->
 <div>
-  <p class="efNhRD">I'm blue</p>
-  <p class="kGJulO">I'm magenta</p>
+  <p class="jODart">I'm blue</p>
+  <p class="iDgeTy">I'm magenta</p>
 </div>
 ```
 
